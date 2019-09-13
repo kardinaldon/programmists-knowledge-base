@@ -5,5 +5,5 @@ import javax.servlet.http.HttpServlet;
 
 @WebServlet
 public class ArticleServlet extends HttpServlet {
-    
+
 }
