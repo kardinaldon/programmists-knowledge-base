@@ -24,6 +24,14 @@ public class ArticleCrudController {
         return articleList;
     }
 
+    //Тест
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTest() {
+        return "Test";
+    }
+
     //получить статью по id
     // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/getwitid?id=1   - получить статью с id 1
     @GET
