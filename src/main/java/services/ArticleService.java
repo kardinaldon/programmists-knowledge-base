@@ -11,7 +11,8 @@ public class ArticleService {
     public ArticleService() {
     }
 
-    public Article findArticleFromId(int id) {
+
+    public Article findArticleWithId (int id) {
         return articleDAO.findById(id);
     }
 

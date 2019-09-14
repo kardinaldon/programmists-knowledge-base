@@ -11,7 +11,7 @@ public class CategoryService {
     public CategoryService() {
     }
 
-    public Category findCategoryFromId(int id) {
+    public Category findCategoryWitId(int id) {
         return categoryDAO.findById(id);
     }
 

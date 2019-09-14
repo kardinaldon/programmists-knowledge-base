@@ -11,11 +11,11 @@ public class UserService {
     public UserService() {
     }
 
-    public User findUserFromId(int id) {
+    public User findUserWitId(int id) {
         return userDAO.findById(id);
     }
 
-    public void saveUser(User user) {
+    public void createUser(User user) {
         userDAO.save(user);
     }
 

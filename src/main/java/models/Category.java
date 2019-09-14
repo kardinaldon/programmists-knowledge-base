@@ -1,18 +1,23 @@
 package models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "categories")
 public class Category {
 
-    int id;
-    String title;
-    String description;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="id")
+    private int id;
+
+    @Column(name="title")
+    private String title;
+
+    @Column(name="description")
+    private String description;
 
     public Category() {
-    }
-
-    public Category(int id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
     }
 
     public int getId() {
@@ -21,6 +26,11 @@ public class Category {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Category(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public String getTitle() {
