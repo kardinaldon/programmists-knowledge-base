@@ -8,8 +8,8 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
+    @Column(name="categoryId")
+    private int categoryId;
 
     @Column(name="title")
     private String title;
@@ -21,11 +21,7 @@ public class Category {
     }
 
     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        return categoryId;
     }
 
     public Category(String title, String description) {

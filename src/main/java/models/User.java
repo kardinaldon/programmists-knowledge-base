@@ -8,8 +8,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
+    @Column(name="userId")
+    private int userId;
 
     @Column(name="name")
     private String name;
@@ -30,7 +30,7 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return userId;
     }
 
     public String getName() {

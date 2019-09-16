@@ -15,29 +15,31 @@ ALTER SEQUENCE hibernate_sequence
     OWNER TO aesehxwtplugav;
 
 create table users (
-                       id integer not null unique,
+                       userId integer not null unique,
                        name varchar(300) unique not null,
                        login varchar(300) unique not null,
                        password varchar(300) not null,
-                       PRIMARY KEY (login)
+                       PRIMARY KEY (userId)
 );
 
 create table categories (
-                            id integer not null unique,
+                            categoryId integer not null unique,
                             title varchar(300) unique not null,
                             description text,
-                            PRIMARY KEY (title)
+                            PRIMARY KEY (categoryId)
 );
 
 create table articles (
-                          id integer not null unique,
+                          articleId integer not null unique,
                           title text not null,
+                          smallDescription text,
                           description text,
+                          dateOfCreation date,
                           creator integer,
                           category integer,
-                          PRIMARY KEY (id),
-                          FOREIGN KEY (creator) REFERENCES users(id) ON DELETE RESTRICT,
-                          FOREIGN KEY (category) REFERENCES categories (id) ON DELETE RESTRICT
+                          PRIMARY KEY (articleId),
+                          FOREIGN KEY (creator) REFERENCES users(userId) ON DELETE RESTRICT,
+                          FOREIGN KEY (category) REFERENCES categories (categoryId) ON DELETE RESTRICT
 );
 
 select * from users;

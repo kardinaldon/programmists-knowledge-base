@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "articles")
@@ -8,11 +10,17 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
+    @Column(name="articleId")
+    private int articleId;
 
     @Column(name="title")
     private String title;
+
+    @Column(name="smallDescription")
+    private String smallDescription;
+
+    @Column(name="dateOfCreation")
+    private LocalDateTime dateOfCreation;
 
     @Column(name="description")
     private String description;
@@ -36,7 +44,7 @@ public class Article {
     }
 
     public int getId() {
-        return id;
+        return articleId;
     }
 
     public String getTitle() {
@@ -45,6 +53,22 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSmallDescription() {
+        return smallDescription;
+    }
+
+    public void setSmallDescription(String smallDescription) {
+        this.smallDescription = smallDescription;
+    }
+
+    public LocalDateTime getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
 
     public String getDescription() {

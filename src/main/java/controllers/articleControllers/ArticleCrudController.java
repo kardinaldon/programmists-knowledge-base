@@ -1,35 +1,48 @@
 package controllers.articleControllers;
 
 import models.Article;
+import models.modelsForRestApi.ArticleModelForJsonOut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import services.ArticleService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/article")
 public class ArticleCrudController {
 
     private ArticleService articleService = new ArticleService();
-    private List<Article> articleList;
     private Article article;
+    private List<Article> articleList;
+    private ArticleModelForJsonOut articleModelForJsonOut;
+    private List <ArticleModelForJsonOut> articleModelForJsonOutList;
+
+    private static final Logger logger = LoggerFactory.getLogger(ArticleCrudController.class);
 
     //получить все статьи http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/all
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Article> getAllArticles() {
+    public List <ArticleModelForJsonOut> getAllArticles() {
         articleList = articleService.findAllArticles();
+        articleModelForJsonOutList = new ArrayList<>();
+        for (Article article: articleList) {
+            articleModelForJsonOut = new ArticleModelForJsonOut();
+            articleModelForJsonOut.setArticleId(article.getId());
+            articleModelForJsonOut.setTitle(article.getTitle());
+            articleModelForJsonOut.setSmallDescription(article.getSmallDescription());
+            articleModelForJsonOut.setDescription(article.getDescription());
+            articleModelForJsonOut.setCategoryName(article.getCategory().getTitle());
+            articleModelForJsonOut.setUserName(article.getUser().getName());
+            articleModelForJsonOut.setDateOfCreation(String.valueOf(article.getDateOfCreation()));
+            articleModelForJsonOutList.add(articleModelForJsonOut);
+        }
+        logger.info("RESTful Service running /article/all");
         System.out.println("RESTful Service running /article/all");
-        return articleList;
-    }
-
-    //Тест
-    @GET
-    @Path("/test")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getTest() {
-        return "Test";
+        return articleModelForJsonOutList;
     }
 
     //получить статью по id
