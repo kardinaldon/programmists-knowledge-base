@@ -8,27 +8,29 @@ $(document).ready (
             success: function(data){
                 if(data){
                     var len = data.length;
-                    var articleId = "";
-                    // var title = "";
-                    // var smallDescription = "";
-                    var description = "";
-                    var categoryName = "";
-                    var dateOfCreation = "";
-                    var userName = "";
+                    // var articleId = "";
+                    // // var title = "";
+                    // // var smallDescription = "";
+                    // var description = "";
+                    // var categoryName = "";
+                    // var dateOfCreation = "";
+                    // var userName = "";
 
                     if(len > 0){
                         for(var i=0;i<len;i++){
                             if(data[i].articleId != null && data[i].title != null){
-                                articleId += data[i].articleId;
+                                var articleId = data[i].articleId;
                                 var title = data[i].title;
                                 var smallDescription = data[i].smallDescription;
-                                description += data[i].description;
-                                categoryName += data[i].categoryName;
-                                dateOfCreation += data[i].dateOfCreation;
-                                userName += data[i].userName;
+                                var description = data[i].description;
+                                var categoryName = data[i].categoryName;
+                                var dateOfCreation = data[i].dateOfCreation;
+                                var userName = data[i].userName;
+                                hrefGet = 'http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/getwitid?id=';
+                                hrefSinglePage = 'single_article.html?id=';
                                 if (articleId !="") {
                                     var clone = $('.article:first').clone(true,true);
-                                    var cloneTitle = clone.find('.title').empty().append(title);
+                                    var cloneTitle = clone.find('#article_title').attr('href',hrefSinglePage+articleId).empty().append(title);
                                     var cloneItems = clone.find('.smallDescription').empty().append(smallDescription);
                                     clone.appendTo('.container');
                                     //console.log(data[i].title);
