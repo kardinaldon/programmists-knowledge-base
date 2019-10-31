@@ -26,6 +26,7 @@ public class ArticleCrudController {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public List <ArticleModelForJsonOut> getAllArticles() {
         articleList = articleService.findAllArticles();
         articleModelForJsonOutList = new ArrayList<>();
@@ -50,6 +51,7 @@ public class ArticleCrudController {
     @GET
     @Path("/getwitid")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Article getArticleOnId(@QueryParam("id") int id) {
         article = articleService.findArticleWithId(id);
         System.out.println("RESTful Service running article/getwitid: "+id);

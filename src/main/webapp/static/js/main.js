@@ -8,13 +8,6 @@ $(document).ready (
             success: function(data){
                 if(data){
                     var len = data.length;
-                    // var articleId = "";
-                    // // var title = "";
-                    // // var smallDescription = "";
-                    // var description = "";
-                    // var categoryName = "";
-                    // var dateOfCreation = "";
-                    // var userName = "";
 
                     if(len > 0){
                         for(var i=0;i<len;i++){
@@ -28,7 +21,7 @@ $(document).ready (
                                 var userName = data[i].userName;
                                 hrefGet = 'http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/getwitid?id=';
                                 hrefSinglePage = 'single_article.html?id=';
-                                if (articleId !="") {
+                                if (articleId !=="") {
                                     var clone = $('.article:first').clone(true,true);
                                     var cloneTitle = clone.find('#article_title').attr('href',hrefSinglePage+articleId).empty().append(title);
                                     var cloneItems = clone.find('.smallDescription').empty().append(smallDescription);
@@ -47,4 +40,4 @@ $(document).ready (
             }
         });
         return false;
-    })
+    });

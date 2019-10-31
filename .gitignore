@@ -1,4 +1,3 @@
 target
 out
 .idea/
-/src/main/resources/hibernate.cfg.xml
