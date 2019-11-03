@@ -1,0 +1,37 @@
+<configuration>
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder
+            by default -->
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level  %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>src/main/logs/logfile_test.log</File>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logfile_test.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- Храним файлы логов 10 дней -->
+            <maxHistory>10</maxHistory>
+
+            <!-- Максимальный размер файлов лога 30 гигабайт -->
+            <totalSizeCap>5MB</totalSizeCap>
+
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level  %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="controllers.articleControllers" level="INFO" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+</configuration>

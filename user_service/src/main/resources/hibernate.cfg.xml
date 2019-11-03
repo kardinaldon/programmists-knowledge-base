@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/programmists-knowledge-base</property>
+
+        <!--как только переполнится пул коннектов, укажем, сколько соединений ещё добавить в пул-->
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+        <!--как долго ждать, чтобы подтвердить соединение, т.е. не закрывать его, а, например, сделать запрос "select 1"-->
+        <property name="hibernate.c3p0.idle_test_period">300</property>
+        <!--максимальное количество соединений в пуле-->
+        <property name="hibernate.c3p0.max_size">20</property>
+        <!--минимальный размер пула-->
+        <property name="hibernate.c3p0.min_size">4</property>
+        <!--таймаут для с3p0-->
+        <property name="hibernate.c3p0.timeout">320</property>
+        <!--размер кэша стейтментов-->
+        <property name="hibernate.c3p0.max_statements">3</property>
+
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">123456789</property>
+        <property name="hibernate.show_sql">true</property>
+
+        <mapping class="models.Article" />
+        <mapping class="models.Category" />
+        <mapping class="models.User" />
+
+    </session-factory>
+
+</hibernate-configuration>
