@@ -7,25 +7,30 @@
     <groupId>com.programmists.knowledge.base</groupId>
     <artifactId>com.programmists.knowledge.base</artifactId>
     <version>1</version>
+    <packaging>war</packaging>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <modules>
-        <module>admin_service</module>
-        <module>auth_service</module>
-        <module>user_service</module>
-        <module>content_service</module>
-    </modules>
-    <packaging>pom</packaging>
+
 
     <properties>
         <maven.compile.source>8</maven.compile.source>
@@ -37,12 +42,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>2.12.1</log4j.version>
         <logback.version>1.2.3</logback.version>
-        <spring.version>5.2.0.RELEASE</spring.version>
         <lombok.version>1.18.10</lombok.version>
-        <liquibase.version>3.8.0</liquibase.version>
-        <jjwt.version>0.9.1</jjwt.version>
-        <servlet.version>4.0.1</servlet.version>
-
     </properties>
 
     <dependencies>
@@ -106,29 +106,25 @@
             <scope>provided</scope>
         </dependency>
 
-
-        <!--Authorization-->
+        <!--view-->
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.24</version>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>7.0</version>
         </dependency>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.64</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>apache-jstl</artifactId>
+            <version>9.4.21.v20190926</version>
         </dependency>
+
+
 
 
     </dependencies>

@@ -1,10 +1,4 @@
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,24 +106,24 @@ public class Main {
 //        System.exit(0);
 
         //          Подключаем стороннего провайдера
-        Security.addProvider(new BouncyCastleProvider());
-
-            Provider[] providers = Security.getProviders();
-            for (Provider p : providers) {
-                System.out.println(p.getName());
-            }
-
-        try {
-            MessageDigest digester = MessageDigest.getInstance("SHA-512");
-            byte[] input = "Secret string".getBytes();
-            byte[] digest = digester.digest(input);
-            byte[] salt = new byte[16];
-            SecureRandom.getInstanceStrong().nextBytes(salt);
-            digester.update(salt);
-            System.out.println(DatatypeConverter.printHexBinary(digest));
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException(e);
-        }
+//        Security.addProvider(new BouncyCastleProvider());
+//
+//            Provider[] providers = Security.getProviders();
+//            for (Provider p : providers) {
+//                System.out.println(p.getName());
+//            }
+//
+//        try {
+//            MessageDigest digester = MessageDigest.getInstance("SHA-512");
+//            byte[] input = "Secret string".getBytes();
+//            byte[] digest = digester.digest(input);
+//            byte[] salt = new byte[16];
+//            SecureRandom.getInstanceStrong().nextBytes(salt);
+//            digester.update(salt);
+//            System.out.println(DatatypeConverter.printHexBinary(digest));
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new IllegalStateException(e);
+//        }
 
 
 
