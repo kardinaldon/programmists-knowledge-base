@@ -1,4 +1,8 @@
 body {
-    background-image: url("#{resource['/media/login_page_background.jpg']}");
+    background-image: url("/../media/login_page_background.jpg");
+    background-repeat: round;
+}
+.red {
+    background-image: url("/media/login_page_background.jpg");
     background-repeat: round;
 }
