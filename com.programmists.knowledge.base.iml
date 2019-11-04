@@ -12,6 +12,7 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/webapp/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -79,5 +80,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:apache-jstl:9.4.21.v20190926" level="project" />
     <orderEntry type="library" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.2.20" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.2.20" level="project" />
   </component>
 </module>

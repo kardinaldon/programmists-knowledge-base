@@ -1,4 +1,11 @@
 body {
-    background-image: url("/../../secured/media/login_page_background.jpg");
+    background-image: url("/../media/login_page_background.jpg");
     background-repeat: round;
 }
+.red {
+    background-image: url("/media/login_page_background.jpg");
+    background-repeat: round;
+}
+/*body {*/
+/*    background-color: khaki;*/
+/*}*/
