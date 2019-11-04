@@ -1,4 +1,4 @@
 body {
-    background-image: url("/../../secured/media/login_page_background.jpg");
+    background-image: url("#{resource['/media/login_page_background.jpg']}");
     background-repeat: round;
 }
