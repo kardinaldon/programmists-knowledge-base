@@ -1,6 +1,9 @@
 
+import models.RoleEnum;
+import models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.UserService;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.*;
@@ -12,8 +15,20 @@ public class Main {
 
 //        //Тестово создать пользователя
 //        UserService userService = new UserService();
-//        User user = new User ("Fedor23g54s241","2fd5573386g45s253044812024439711366amail.ru", "f2d443555g2s4240263g7591841107gg6633sab");
+//        User user = new User ();
+//        user.setLogin("test");
+//        user.setName("test");
+//        user.setPassword("test");
+//        user.setRole(RoleEnum.ADMIN);
 //        userService.createUser(user);
+//        log.info(user.getName() + " создан");
+//
+//        if (userService.findUserByName(user.getName()) != null) {
+//            log.info("Поиск пользователя по имени произведен успешно, его id "+ user.getUserId());
+//        } else {
+//            log.error("поиск не сработал");
+//        }
+
 //
 //        //Тестово создать категорию
 //        CategoryService categoryService = new CategoryService();

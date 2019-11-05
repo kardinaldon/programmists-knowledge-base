@@ -1,14 +1,21 @@
 package models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "articles")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Article {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="articleId")
     private int articleId;
 
@@ -30,67 +37,6 @@ public class Article {
 
     @ManyToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name="creator")
-    private String user;
+    private User user;
 
-    public Article() {
-    }
-
-    public Article(String title, String description, Category category, String user) {
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.user = user;
-    }
-
-    public int getId() {
-        return articleId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSmallDescription() {
-        return smallDescription;
-    }
-
-    public void setSmallDescription(String smallDescription) {
-        this.smallDescription = smallDescription;
-    }
-
-    public LocalDateTime getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
 }

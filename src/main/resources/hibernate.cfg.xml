@@ -26,6 +26,10 @@
         <property name="hibernate.connection.password">123456789</property>
         <property name="hibernate.show_sql">true</property>
 
+        <property name="hibernate.search.default.directory_provider"/>
+
+        <property name="hibernate.search.default.indexBase"/>
+
         <mapping class="models.Article" />
         <mapping class="models.Category" />
         <mapping class="models.User" />

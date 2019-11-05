@@ -1,9 +1,14 @@
 package dao;
 
 import models.User;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import utils.HibernateSessionFactoryUtil;
+
 
 import java.util.List;
 
@@ -16,12 +21,45 @@ public class UserDAO {
         return user;
     }
 
-    public User findByName (String name) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, name);
-        session.flush();
-        session.close();
-        return user;
+    public List <User> findByName (String name) throws InterruptedException {
+        List<User> users = null;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            transaction = session.getTransaction();
+            transaction.begin();
+
+            FullTextSession fullTextSession = Search.getFullTextSession(session);
+            fullTextSession.createIndexer().startAndWait();
+
+            QueryBuilder qb = fullTextSession.getSearchFactory()
+                    .buildQueryBuilder().forEntity(User.class).get();
+
+            // Create lucene query
+            // Set indexed field
+            org.apache.lucene.search.Query lucenceQuery =
+                    qb.keyword().onFields("name")
+                            .matching(name).createQuery();
+
+            // Warp lucene query in org.hibernate.query.Query
+            @SuppressWarnings("unchecked")
+            Query<User> query = fullTextSession.createFullTextQuery(lucenceQuery,
+                    User.class);
+            users = query.getResultList();
+
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return users;
     }
 
 

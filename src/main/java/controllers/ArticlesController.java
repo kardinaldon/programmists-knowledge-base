@@ -32,12 +32,12 @@ public class ArticlesController {
         articleModelForJsonOutList = new ArrayList<>();
         for (Article article: articleList) {
             articleModelForJsonOut = new ArticleModelForJsonOut();
-            articleModelForJsonOut.setArticleId(article.getId());
+            articleModelForJsonOut.setArticleId(article.getArticleId());
             articleModelForJsonOut.setTitle(article.getTitle());
             articleModelForJsonOut.setSmallDescription(article.getSmallDescription());
             articleModelForJsonOut.setDescription(article.getDescription());
             articleModelForJsonOut.setCategoryName(article.getCategory().getTitle());
-            articleModelForJsonOut.setUserName(article.getUser());
+            articleModelForJsonOut.setUserName(article.getUser().getName());
             articleModelForJsonOut.setDateOfCreation(String.valueOf(article.getDateOfCreation()));
             articleModelForJsonOutList.add(articleModelForJsonOut);
         }
@@ -65,7 +65,7 @@ public class ArticlesController {
     @Produces(MediaType.APPLICATION_JSON)
     public Article createNewArticle (Article article) {
         articleService.saveArticle(article);
-        System.out.println("RESTful Service running /newproduct "+article.getId()+" "+article.getTitle()+" "+article.getCategory().getTitle()+" "+article.getUser());
+        System.out.println("RESTful Service running /newproduct "+article.getArticleId()+" "+article.getTitle()+" "+article.getCategory().getTitle()+" "+article.getUser());
         return article;
     }
 

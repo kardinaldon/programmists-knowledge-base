@@ -15,22 +15,23 @@ ALTER SEQUENCE hibernate_sequence
     OWNER TO postgres;
 
 create table users (
-                       userId integer not null unique,
+                       userId serial,
                        name varchar(300) unique not null,
                        login varchar(300) unique not null,
                        password varchar(300) not null,
+                       role varchar(300) not null,
                        PRIMARY KEY (userId)
 );
 
 create table categories (
-                            categoryId integer not null unique,
+                            categoryId serial,
                             title varchar(300) unique not null,
                             description text,
                             PRIMARY KEY (categoryId)
 );
 
 create table articles (
-                          articleId integer not null unique,
+                          articleId serial,
                           title text not null,
                           smallDescription text,
                           description text,

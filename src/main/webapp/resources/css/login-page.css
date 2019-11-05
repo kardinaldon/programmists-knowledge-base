@@ -1,8 +1,16 @@
 body {
-    background-image: url("/../media/login_page_background.jpg");
-    background-repeat: round;
+    background-image: url("#{resource['media/login_page_background.jpg']}");
 }
-.red {
-    background-image: url("/media/login_page_background.jpg");
-    background-repeat: round;
+
+.login_form {
+    max-width: 500px;
+    max-height: 500px;
+    background-color: transparent;
+    box-shadow:
+            inset rgba(255,255,255,.6) 0 20em .3em,
+            inset rgba(0,0,0,.2) 0 -.1em .3em,
+            rgba(0,0,0,.4) 0 .1em 1px,
+            rgba(0,0,0,.3) 0 .2em 6px;
+    border-radius: 8px;
+    margin: 0 auto;
 }
