@@ -1,12 +1,5 @@
 package controllers;
 
-import models.User;
-import service.UserService;
-
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
 //@Path("/users")
 //public class UsersController {
 //

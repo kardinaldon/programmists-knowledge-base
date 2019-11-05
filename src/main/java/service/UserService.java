@@ -1,12 +1,12 @@
 package service;
 
 import dao.UserDAO;
-import models.User;
+import models.user.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+//@Transactional
 public class UserService {
     private UserDAO userDAO = new UserDAO();
 
@@ -17,10 +17,11 @@ public class UserService {
         return userDAO.findById(id);
     }
 
-    public List<User> findUserByName(String name) throws InterruptedException {
-        return userDAO.findByName(name);
+    public List<User> findUserByEmail(String email) throws InterruptedException {
+        return userDAO.findByName(email);
     }
 
+    @Transactional
     public void createUser(User user) {
         userDAO.save(user);
     }

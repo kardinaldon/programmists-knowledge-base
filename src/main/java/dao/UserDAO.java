@@ -1,6 +1,6 @@
 package dao;
 
-import models.User;
+import models.user.User;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,7 +21,7 @@ public class UserDAO {
         return user;
     }
 
-    public List <User> findByName (String name) throws InterruptedException {
+    public List <User> findByName (String email) throws InterruptedException {
         List<User> users = null;
         Session session = null;
         Transaction transaction = null;
@@ -36,11 +36,9 @@ public class UserDAO {
             QueryBuilder qb = fullTextSession.getSearchFactory()
                     .buildQueryBuilder().forEntity(User.class).get();
 
-            // Create lucene query
-            // Set indexed field
             org.apache.lucene.search.Query lucenceQuery =
-                    qb.keyword().onFields("name")
-                            .matching(name).createQuery();
+                    qb.keyword().onFields("email")
+                            .matching(email).createQuery();
 
             // Warp lucene query in org.hibernate.query.Query
             @SuppressWarnings("unchecked")
@@ -73,7 +71,7 @@ public class UserDAO {
             transaction.rollback();
             throw new RuntimeException(ex);
         }
-        session.flush();
+        //session.flush();
         session.close();
 
     }

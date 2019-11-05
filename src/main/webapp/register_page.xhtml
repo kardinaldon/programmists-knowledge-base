@@ -14,14 +14,14 @@
 <h:body>
 
     <div class="login_form">
-        <h2>Log in please:</h2>
+        <h2>Register please:</h2>
         <h:form>
             <span class="ui-float-label">
-                <p:inputText value="#{loginBean.email}"/>
+                <p:inputText value="#{registerBean.email}"/>
                 <p:outputLabel for="@previous" value="Username"/>
-                <p:inputText id="inlineFeedback" value="#{loginBean.password}" feedback="true" inline="true"/>
+                <p:inputText id="inlineFeedback" value="#{registerBean.password}" feedback="true" inline="true"/>
                 <p:outputLabel for="@previous" value="password"/>
-                <p:commandButton value="With Icon" id="withIcon" action="#{loginBean.findUser(loginBean.email, loginBean.password)}" style="margin-right:20px;" />
+                <p:commandButton value="With Icon" id="withIcon" action="#{registerBean.createUser(registerBean.email, registerBean.password)}" style="margin-right:20px;" />
                 <p:messages id="messages" showDetail="true" closable="true">
                     <p:autoUpdate />
                  </p:messages>

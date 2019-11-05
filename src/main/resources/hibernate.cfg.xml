@@ -27,12 +27,11 @@
         <property name="hibernate.show_sql">true</property>
 
         <property name="hibernate.search.default.directory_provider"/>
-
         <property name="hibernate.search.default.indexBase"/>
 
         <mapping class="models.Article" />
         <mapping class="models.Category" />
-        <mapping class="models.User" />
+        <mapping class="models.user.User" />
 
     </session-factory>
 

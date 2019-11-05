@@ -3,6 +3,7 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import models.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

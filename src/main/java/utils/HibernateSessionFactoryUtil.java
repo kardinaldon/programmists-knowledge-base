@@ -2,7 +2,7 @@ package utils;
 
 import models.Article;
 import models.Category;
-import models.User;
+import models.user.User;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

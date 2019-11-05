@@ -1,26 +1,14 @@
 DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_table;
 
-DROP SEQUENCE IF EXISTS hibernate_sequence;
-
-CREATE SEQUENCE hibernate_sequence
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    CACHE 1;
-
-ALTER SEQUENCE hibernate_sequence
-    OWNER TO postgres;
-
-create table users (
-                       userId serial,
-                       name varchar(300) unique not null,
-                       login varchar(300) unique not null,
-                       password varchar(300) not null,
-                       role varchar(300) not null,
-                       PRIMARY KEY (userId)
+create table user_table (
+                            userId serial,
+                            email varchar(300) unique not null,
+                            password varchar(300) not null,
+                            role numeric default 0,
+                            status numeric default 1,
+                            PRIMARY KEY (userId)
 );
 
 create table categories (
@@ -39,9 +27,10 @@ create table articles (
                           creator integer,
                           category integer,
                           PRIMARY KEY (articleId),
-                          FOREIGN KEY (creator) REFERENCES users(userId) ON DELETE RESTRICT,
+                          FOREIGN KEY (creator) REFERENCES user_table(userId) ON DELETE RESTRICT,
                           FOREIGN KEY (category) REFERENCES categories (categoryId) ON DELETE RESTRICT
 );
+
 
 select * from users;
 select * from categories;

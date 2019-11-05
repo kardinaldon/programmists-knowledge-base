@@ -1,24 +1,19 @@
-package models;
+package models.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,11 +26,8 @@ public class User {
     private int userId;
 
     @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
-    @Column(name="name")
-    private String name;
-
-    @Column(name="login")
-    private String login;
+    @Column(name="email")
+    private String email;
 
     @Column(name="password")
     private String password;
@@ -43,5 +35,7 @@ public class User {
     @Column(name = "role")
     private RoleEnum role;
 
+    @Column(name = "status")
+    private StatusEnum statusEnum;
 
 }

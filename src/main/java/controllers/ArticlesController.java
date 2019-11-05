@@ -37,7 +37,7 @@ public class ArticlesController {
             articleModelForJsonOut.setSmallDescription(article.getSmallDescription());
             articleModelForJsonOut.setDescription(article.getDescription());
             articleModelForJsonOut.setCategoryName(article.getCategory().getTitle());
-            articleModelForJsonOut.setUserName(article.getUser().getName());
+            articleModelForJsonOut.setUserName(article.getUser().getEmail());
             articleModelForJsonOut.setDateOfCreation(String.valueOf(article.getDateOfCreation()));
             articleModelForJsonOutList.add(articleModelForJsonOut);
         }

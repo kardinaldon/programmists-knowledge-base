@@ -2,6 +2,8 @@ package beans;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import models.user.RoleEnum;
+import models.user.StatusEnum;
 import models.user.User;
 import service.UserService;
 
@@ -10,48 +12,55 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.List;
 
 @ManagedBean
 @RequestScoped
 @Data
 @Slf4j
-public class LoginBean {
+public class RegisterBean {
 
     String email;
     String password;
 
     UserService userService = new UserService();
+    User user= new User();;
 
     FacesContext context = FacesContext.getCurrentInstance();
     FacesMessage message;
     String path = context.getExternalContext().getRequestContextPath();
     ExternalContext externalContext = context.getExternalContext();
 
-    public void findUser (@NotNull String email, @NotNull String password) throws InterruptedException {
-
-        List<User> users = userService.findUserByEmail(email);
-        for (User user: users) {
-            if (!email.isEmpty() & !password.isEmpty()) {
-                if(user != null && user.getPassword().equals(password)) {
-                    addMessage(false, "Вход выполнен");
-                    log.info("login as "+email);
+    public void createUser (String email, String password) {
+        if (!email.isEmpty() & !password.isEmpty()) {
+            try {
+                if (userService.findUserByEmail(email).size() != 0) {
+                    addMessage(true, "Пользователь с такими email уже создан");
+                    log.error("wrong username or password");
+                } else {
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    user.setRole(RoleEnum.USER);
+                    user.setStatusEnum(StatusEnum.NOT_ACTIVE);
+                    userService.createUser(user);
+                    addMessage(false, "Пользователь создан");
+                    log.info("User " + email + "created");
                     try {
-                        externalContext.redirect(path + "/secured/index.html");
+                        externalContext.redirect(path + "/");
                     } catch (IOException e) {
                         e.printStackTrace();
+                        addMessage(true, "Ошибка при создании пользователя");
+                        log.error("wrong username or password");
                     }
-                } else {
-                    addMessage(true, "Пользователь с такими учетными данными не найден");
-                    log.error("wrong username or password");
                 }
-            } else {
-                addMessage(true, "ВВедите ваш логин и пароль");
-                log.error("one of the fields in JSF GUI is empty");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+        } else {
+            addMessage(true, "Заполните все поля");
+            log.error("one of the fields are empty");
         }
+
     }
 
     private void addMessage(boolean error, String detail) {

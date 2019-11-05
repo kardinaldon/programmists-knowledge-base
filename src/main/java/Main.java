@@ -1,33 +1,30 @@
 
-import models.RoleEnum;
-import models.User;
+import models.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.UserService;
-
-import javax.xml.bind.DatatypeConverter;
-import java.security.*;
 
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
+        UserService userService = new UserService();
+
 //        //Тестово создать пользователя
 //        UserService userService = new UserService();
 //        User user = new User ();
-//        user.setLogin("test");
-//        user.setName("test");
+//        user.setEmail("test");
 //        user.setPassword("test");
-//        user.setRole(RoleEnum.ADMIN);
+////        user.setRole(RoleEnum.ADMIN);
 //        userService.createUser(user);
-//        log.info(user.getName() + " создан");
-//
-//        if (userService.findUserByName(user.getName()) != null) {
-//            log.info("Поиск пользователя по имени произведен успешно, его id "+ user.getUserId());
-//        } else {
-//            log.error("поиск не сработал");
-//        }
+//        log.info(user.getEmail() + " создан");
+
+        try {
+            System.out.println(userService.findUserByEmail("test2").size());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 //
 //        //Тестово создать категорию
