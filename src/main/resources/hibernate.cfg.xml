@@ -32,6 +32,7 @@
         <mapping class="models.Article" />
         <mapping class="models.Category" />
         <mapping class="models.user.User" />
+        <mapping class="models.GeneratedValues" />
 
     </session-factory>
 

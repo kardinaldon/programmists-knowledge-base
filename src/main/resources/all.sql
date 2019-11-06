@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS user_table;
+DROP TABLE IF EXISTS generated_values;
 
 create table user_table (
                             userId serial,
@@ -31,7 +32,11 @@ create table articles (
                           FOREIGN KEY (category) REFERENCES categories (categoryId) ON DELETE RESTRICT
 );
 
+create table generated_values (
+    generatedValueId serial,
+    generatedValue varchar unique not null
+);
 
-select * from users;
+select * from user_table;
 select * from categories;
 select * from articles;

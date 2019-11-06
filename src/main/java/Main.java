@@ -1,15 +1,45 @@
 
-import models.user.User;
+import models.GeneratedValues;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import service.UserService;
+import service.GeneratedValueService;
+import utils.RandomGenerator;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
-        UserService userService = new UserService();
+
+        GeneratedValueService generatedValueService = new GeneratedValueService();
+        GeneratedValues generatedValues = new GeneratedValues();
+        generatedValues.setGeneratedValue((new RandomGenerator().getAlphanumericRandomValue(20,true,true)));
+        generatedValueService.createGeneratedValue(generatedValues);
+        System.out.println(generatedValues.getGeneratedValueId());
+
+
+//        System.out.println(new Properties().getProperty("mail.smtp.password"));
+
+//        String to = "kardinaldon@yandex.ua";         // sender email
+//        String from = "kardinal021188@mail.ru";       // receiver email
+//        String host = "smtp.yandex.ru";            // mail server host
+//
+//        Properties properties = System.getProperties();
+//        properties.setProperty("mail.smtp.host", host);
+//
+//        Session session = Session.getDefaultInstance(properties); // default session
+
+//        UserService userService = new UserService();
 
 //        //Тестово создать пользователя
 //        UserService userService = new UserService();
@@ -20,11 +50,11 @@ public class Main {
 //        userService.createUser(user);
 //        log.info(user.getEmail() + " создан");
 
-        try {
-            System.out.println(userService.findUserByEmail("test2").size());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            System.out.println(userService.findUserByEmail("test2").size());
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 //
 //        //Тестово создать категорию

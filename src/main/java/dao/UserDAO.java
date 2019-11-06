@@ -71,7 +71,6 @@ public class UserDAO {
             transaction.rollback();
             throw new RuntimeException(ex);
         }
-        //session.flush();
         session.close();
 
     }

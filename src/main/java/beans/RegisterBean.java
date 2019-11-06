@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 @ManagedBean
@@ -24,14 +26,14 @@ public class RegisterBean {
     String password;
 
     UserService userService = new UserService();
-    User user= new User();;
+    User user= new User();
 
     FacesContext context = FacesContext.getCurrentInstance();
     FacesMessage message;
     String path = context.getExternalContext().getRequestContextPath();
     ExternalContext externalContext = context.getExternalContext();
 
-    public void createUser (String email, String password) {
+    public void createUser (@Email @NotNull String email, @NotNull String password) {
         if (!email.isEmpty() & !password.isEmpty()) {
             try {
                 if (userService.findUserByEmail(email).size() != 0) {
@@ -43,7 +45,7 @@ public class RegisterBean {
                     user.setRole(RoleEnum.USER);
                     user.setStatusEnum(StatusEnum.NOT_ACTIVE);
                     userService.createUser(user);
-                    addMessage(false, "Пользователь создан");
+                    addMessage(false, "На ваш электронный адрес отправлено письмо, перейдите по ссылке из письма для завершения регистрации");
                     log.info("User " + email + "created");
                     try {
                         externalContext.redirect(path + "/");

@@ -6,12 +6,8 @@ import models.user.User;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Transactional
 public class UserService {
     private UserDAO userDAO = new UserDAO();
-
-    public UserService() {
-    }
 
     public User findUserById(int id) {
         return userDAO.findById(id);
@@ -21,7 +17,6 @@ public class UserService {
         return userDAO.findByName(email);
     }
 
-    @Transactional
     public void createUser(User user) {
         userDAO.save(user);
     }

@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 @Data
 @Slf4j
 public class LoginBean {
+
 
     String email;
     String password;
@@ -30,7 +32,7 @@ public class LoginBean {
     String path = context.getExternalContext().getRequestContextPath();
     ExternalContext externalContext = context.getExternalContext();
 
-    public void findUser (@NotNull String email, @NotNull String password) throws InterruptedException {
+    public void findUser (@Email @NotNull String email, @NotNull String password) throws InterruptedException {
 
         List<User> users = userService.findUserByEmail(email);
         for (User user: users) {

@@ -2,6 +2,7 @@ package utils;
 
 import models.Article;
 import models.Category;
+import models.GeneratedValues;
 import models.user.User;
 
 import org.hibernate.SessionFactory;
@@ -20,6 +21,7 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Article.class);
                 configuration.addAnnotatedClass(Category.class);
+                configuration.addAnnotatedClass(GeneratedValues.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 
