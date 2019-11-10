@@ -30,7 +30,7 @@ public class RegisterService {
         userService.createUser(user);
         generatedValues = generatedValueService.createGeneratedValue(10,true,true);
         letterTemplate = letterService.findLetterById(1);
-        sendMailService.sendMail(email,email.toString() + letterTemplate.getLetterHeader(), letterTemplate.getLetterText() +
+        sendMailService.sendMail(email,email.substring(0,email.indexOf("@")) + " " + letterTemplate.getLetterHeader(), letterTemplate.getLetterText() +
                 "http://localhost:8080/com_programmists_knowledge_base_1_war/verification/email_verification_page.xhtml?id=" + generatedValues.getGeneratedValue() +
                 "&email=" + email);
         try {

@@ -3,6 +3,7 @@ package models.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class User {
     @Column(name="userId", updatable = false, nullable = false)
     private int userId;
 
+    @NaturalId
     @Column(name="email")
     private String email;
 

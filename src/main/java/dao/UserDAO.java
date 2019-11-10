@@ -18,7 +18,7 @@ public class UserDAO {
 
     public User findByName(String email) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.byNaturalId(User.class).using("name", email).load();
+        User user = session.byNaturalId(User.class).using("email", email).load();
         session.close();
         return user;
     }

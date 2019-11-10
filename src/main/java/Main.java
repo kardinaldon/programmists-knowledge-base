@@ -47,7 +47,7 @@ public class Main {
 
 //        System.out.println(categoryDAO.findByTitle("Category title").getDescription().toString());
 
-        List<Category> categories = categoryService.findCategoryByKeyword("key");
+//        List<Category> categories = categoryService.findCategoryByKeyword("key");
 //        for (Category resultCategory : categories) {
 //            System.out.println(resultCategory.getTitle() + " " + resultCategory.getDescription());
 //        }
@@ -77,13 +77,13 @@ public class Main {
 
 
 
-//        try {
-//            User user = userService.findUserByEmail("kardinaldon@yandex.ua");
-//            userService.deleteUser(user);
-//
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            user = userService.findUserByEmail("kardinaldon@yandex.ua");
+            userService.deleteUser(user);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 //        GeneratedValueService generatedValueService = new GeneratedValueService();
 //        GeneratedValues generatedValue = generatedValueService.createGeneratedValue(10,true,true);
