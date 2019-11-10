@@ -13,7 +13,7 @@ public class UserService {
         return userDAO.findById(id);
     }
 
-    public List<User> findUserByEmail(String email) throws InterruptedException {
+    public User findUserByEmail(String email) throws InterruptedException {
         return userDAO.findByName(email);
     }
 

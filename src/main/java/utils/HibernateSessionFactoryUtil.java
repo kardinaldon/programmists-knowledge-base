@@ -3,6 +3,7 @@ package utils;
 import models.Article;
 import models.Category;
 import models.GeneratedValues;
+import models.LetterTemplate;
 import models.user.User;
 
 import org.hibernate.SessionFactory;
@@ -10,8 +11,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateSessionFactoryUtil {
-    private static SessionFactory sessionFactory;
 
+    private static SessionFactory sessionFactory;
     private HibernateSessionFactoryUtil() {}
 
     public static SessionFactory getSessionFactory() {
@@ -22,6 +23,7 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(Article.class);
                 configuration.addAnnotatedClass(Category.class);
                 configuration.addAnnotatedClass(GeneratedValues.class);
+                configuration.addAnnotatedClass(LetterTemplate.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 

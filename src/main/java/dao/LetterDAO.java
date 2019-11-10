@@ -1,33 +1,29 @@
 package dao;
 
-import models.user.User;
+
+import models.LetterTemplate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
 
+
 import java.util.List;
 
-public class UserDAO {
-    public User findById(int id) {
+public class LetterDAO {
+
+    public LetterTemplate findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
+        LetterTemplate letterTemplate = session.get(LetterTemplate.class, id);
         session.close();
-        return user;
+        return letterTemplate;
     }
 
-    public User findByName(String email) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.byNaturalId(User.class).using("name", email).load();
-        session.close();
-        return user;
-    }
-
-    public void save(User user) {
+    public void save(LetterTemplate letterTemplate) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.save(user);
+            session.save(letterTemplate);
             transaction.commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -37,11 +33,11 @@ public class UserDAO {
 
     }
 
-    public void update(User user) {
+    public void update(LetterTemplate letterTemplate) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.update(user);
+            session.update(letterTemplate);
             transaction.commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -50,11 +46,11 @@ public class UserDAO {
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(LetterTemplate letterTemplate) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.delete(user);
+            session.delete(letterTemplate);
             transaction.commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -66,14 +62,15 @@ public class UserDAO {
     public void deleteAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.createQuery("DELETE FROM models.user.User").executeUpdate();
+        session.createQuery("DELETE FROM models.LetterTemplate").executeUpdate();
         session.getTransaction().commit();
+        session.flush();
         session.close();
     }
 
-    public List<User> findAll() {
+    public List<LetterTemplate> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<User> userList = session.createQuery("From models.user.User").list();
+        List<LetterTemplate> userList = (List<LetterTemplate>)  session.createQuery("From models.LetterTemplate").list();
         session.close();
         return userList;
     }

@@ -27,6 +27,7 @@
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/rest/*</url-pattern>
+        <url-pattern>/verification/*</url-pattern>
     </servlet-mapping>
 
 

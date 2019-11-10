@@ -4,11 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
-import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 
@@ -17,15 +12,13 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Indexed
 public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="userId")
+    @Column(name="userId", updatable = false, nullable = false)
     private int userId;
 
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
     @Column(name="email")
     private String email;
 

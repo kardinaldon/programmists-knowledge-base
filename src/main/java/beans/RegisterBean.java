@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import models.user.RoleEnum;
 import models.user.StatusEnum;
 import models.user.User;
+import service.RegisterService;
 import service.UserService;
 
 import javax.faces.application.FacesMessage;
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @ManagedBean
 @RequestScoped
@@ -25,29 +27,27 @@ public class RegisterBean {
     String email;
     String password;
 
-    UserService userService = new UserService();
-    User user= new User();
+    private UserService userService = new UserService();
+    private User user= new User();
 
     FacesContext context = FacesContext.getCurrentInstance();
     FacesMessage message;
-    String path = context.getExternalContext().getRequestContextPath();
-    ExternalContext externalContext = context.getExternalContext();
+    private String path = context.getExternalContext().getRequestContextPath();
+    private ExternalContext externalContext = context.getExternalContext();
+    private RegisterService registerService = new RegisterService();
 
     public void createUser (@Email @NotNull String email, @NotNull String password) {
         if (!email.isEmpty() & !password.isEmpty()) {
             try {
-                if (userService.findUserByEmail(email).size() != 0) {
+                if (userService.findUserByEmail(email) != null) {
                     addMessage(true, "Пользователь с такими email уже создан");
                     log.error("wrong username or password");
                 } else {
-                    user.setEmail(email);
-                    user.setPassword(password);
-                    user.setRole(RoleEnum.USER);
-                    user.setStatusEnum(StatusEnum.NOT_ACTIVE);
-                    userService.createUser(user);
+                    registerService.startRegistration(email,password);
                     addMessage(false, "На ваш электронный адрес отправлено письмо, перейдите по ссылке из письма для завершения регистрации");
                     log.info("User " + email + "created");
                     try {
+                        TimeUnit.SECONDS.sleep(10);
                         externalContext.redirect(path + "/");
                     } catch (IOException e) {
                         e.printStackTrace();

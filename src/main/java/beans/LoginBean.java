@@ -2,6 +2,7 @@ package beans;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+
 import models.user.User;
 import service.UserService;
 
@@ -13,7 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.List;
 
 @ManagedBean
 @RequestScoped
@@ -22,20 +22,22 @@ import java.util.List;
 public class LoginBean {
 
 
-    String email;
-    String password;
+    protected String email;
+    protected String password;
 
-    UserService userService = new UserService();
+    private UserService userService = new UserService();
+    private User user = new User ();
 
-    FacesContext context = FacesContext.getCurrentInstance();
-    FacesMessage message;
-    String path = context.getExternalContext().getRequestContextPath();
-    ExternalContext externalContext = context.getExternalContext();
+    protected FacesContext context = FacesContext.getCurrentInstance();
+    protected FacesMessage message;
+
+    private String path = context.getExternalContext().getRequestContextPath();
+    private ExternalContext externalContext = context.getExternalContext();
 
     public void findUser (@Email @NotNull String email, @NotNull String password) throws InterruptedException {
 
-        List<User> users = userService.findUserByEmail(email);
-        for (User user: users) {
+       user = userService.findUserByEmail(email);
+
             if (!email.isEmpty() & !password.isEmpty()) {
                 if(user != null && user.getPassword().equals(password)) {
                     addMessage(false, "Вход выполнен");
@@ -53,7 +55,7 @@ public class LoginBean {
                 addMessage(true, "ВВедите ваш логин и пароль");
                 log.error("one of the fields in JSF GUI is empty");
             }
-        }
+
     }
 
     private void addMessage(boolean error, String detail) {
@@ -68,5 +70,13 @@ public class LoginBean {
         }
         context.addMessage(null, message);
         context.getPartialViewContext().getRenderIds().add("globalMessage");
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

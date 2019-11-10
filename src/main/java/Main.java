@@ -1,31 +1,140 @@
 
+import dao.CategoryDAO;
+import models.Category;
 import models.GeneratedValues;
+import models.LetterTemplate;
+import models.user.RoleEnum;
+import models.user.StatusEnum;
+import models.user.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import service.GeneratedValueService;
+import service.*;
 import utils.RandomGenerator;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.GeneratedValue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
-
+        UserService userService = new UserService();
+        CategoryService categoryService = new CategoryService();
+        CategoryDAO categoryDAO = new CategoryDAO();
         GeneratedValueService generatedValueService = new GeneratedValueService();
-        GeneratedValues generatedValues = new GeneratedValues();
-        generatedValues.setGeneratedValue((new RandomGenerator().getAlphanumericRandomValue(20,true,true)));
-        generatedValueService.createGeneratedValue(generatedValues);
-        System.out.println(generatedValues.getGeneratedValueId());
+        Category category = new Category();
+        User user;
+        GeneratedValues generatedValue = new GeneratedValues();
+
+
+
+
+//        category.setTitle("Category title 4");
+//        category.setDescription("category description 4 keywords");
+//        categoryService.saveCategory(category);
+
+//        System.out.println(categoryDAO.findByTitle("Category title").getDescription().toString());
+
+        List<Category> categories = categoryService.findCategoryByKeyword("key");
+//        for (Category resultCategory : categories) {
+//            System.out.println(resultCategory.getTitle() + " " + resultCategory.getDescription());
+//        }
+
+
+
+
+//        generatedValue = generatedValueService.createGeneratedValue(10,true,true);
+//        user = new User ();
+//        user.setEmail("kardinaldon@yandex.ua");
+//        user.setPassword("123456");
+//        user.setRole(RoleEnum.USER);
+//        user.setStatusEnum(StatusEnum.NOT_ACTIVE);
+//        userService.createUser(user);
+
+//            try {
+//                if(generatedValueService.findGeneratedValuesByValue("rmOueNlSNb") != null) {
+//                    user = userService.findUserByEmail("kardinaldon@yandex.ua");
+//                    user.setStatusEnum(StatusEnum.NOT_ACTIVE);
+//                    userService.updateUser(user);
+//                } else {
+//                    log.warn("Попытка верификации по неправильной ссылке");
+//                }
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+
+
+//        try {
+//            User user = userService.findUserByEmail("kardinaldon@yandex.ua");
+//            userService.deleteUser(user);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        GeneratedValueService generatedValueService = new GeneratedValueService();
+//        GeneratedValues generatedValue = generatedValueService.createGeneratedValue(10,true,true);
+//
+//        try {
+//            System.out.println(generatedValueService.findGeneratedValuesByValue(generatedValue.getGeneratedValue()));
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        LetterTemplate letterTemplate = new LetterTemplate();
+//        letterTemplate.setLetterHeader("Подтвердите регистрацию");
+//        letterTemplate.setLetterText("Перейдите по ссылке для завершения регистрации");
+//        LetterService letterService = new LetterService();
+//        letterService.createLetter(letterTemplate );
+
+//        RegisterService registerService = new RegisterService();
+//        registerService.startRegistration("123@mail.ru","123456789");
+
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//            System.out.println("Waked up");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        Runnable task = () -> {
+//            try {
+//                int secToWait = 1000 * 60;
+//                Thread.currentThread().sleep(secToWait);
+//                System.out.println("Waked up");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        };
+//        Thread thread = new Thread(task);
+//        thread.start();
+
+
+//        Thread currentThread = Thread.currentThread();
+//        ThreadGroup threadGroup = currentThread.getThreadGroup();
+//        System.out.println("Thread: " + currentThread.getName());
+//        System.out.println("Thread Group: " + threadGroup.getName());
+//        System.out.println("Parent Group: " + threadGroup.getParent().getName());
+
+
+//        GeneratedValueService generatedValueService = new GeneratedValueService();
+//        GeneratedValues generatedValues = new GeneratedValues();
+//        generatedValues.setGeneratedValue((new RandomGenerator().getAlphanumericRandomValue(20,true,true)));
+//        generatedValueService.createGeneratedValue(generatedValues);
+//        System.out.println(generatedValues.getGeneratedValueId());
 
 
 //        System.out.println(new Properties().getProperty("mail.smtp.password"));

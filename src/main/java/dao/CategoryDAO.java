@@ -3,6 +3,10 @@ package dao;
 import models.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -13,6 +17,49 @@ public class CategoryDAO {
         Category category = session.get(Category.class, id);
         session.close();
         return category;
+    }
+
+    public Category findByTitle(String title) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Category category = session.byNaturalId(Category.class).using("title", title).load();
+        session.close();
+        return category;
+    }
+
+
+    public List<Category> findByKeyword (String keyword) throws InterruptedException {
+        List<Category> categories = null;
+        Transaction transaction = null;
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            transaction = session.getTransaction();
+            transaction.begin();
+
+            FullTextSession fullTextSession = Search.getFullTextSession(session);
+            fullTextSession.createIndexer().startAndWait();
+
+            QueryBuilder qb = fullTextSession.getSearchFactory()
+                    .buildQueryBuilder().forEntity(Category.class).get();
+
+            org.apache.lucene.search.Query lucenceQuery =
+                    qb.keyword().onFields("title", "description")
+                            .matching(keyword).createQuery();
+
+            @SuppressWarnings("unchecked")
+            Query<Category> query = fullTextSession.createFullTextQuery(lucenceQuery,
+                    Category.class);
+            categories = query.getResultList();
+
+            transaction.commit();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+
+        return categories;
     }
 
 
