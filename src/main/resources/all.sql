@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS user_table;
 DROP TABLE IF EXISTS generated_values;
 DROP TABLE IF EXISTS letter_template;
+DROP TABLE IF EXISTS session_table;
 
 
 create table user_table (
@@ -44,4 +45,9 @@ create table letter_template (
   letterHeader text,
   letterText text,
   primary key (letterId)
+);
+
+create table session_table (
+    sessionId serial,
+    sessionValue varchar unique not null
 );

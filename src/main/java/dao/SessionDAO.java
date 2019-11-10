@@ -1,33 +1,31 @@
 package dao;
 
-import models.GeneratedValues;
+import models.user.SessionEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import utils.HibernateSessionFactoryUtil;
 
+public class SessionDAO {
 
-public class GeneratedValueDao {
-
-    public GeneratedValues findById(int id) {
+    public SessionEntity findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        GeneratedValues generatedValues = session.get(GeneratedValues.class, id);
+        SessionEntity sessionEntity = session.get(SessionEntity.class, id);
         session.close();
-        return generatedValues;
+        return sessionEntity;
     }
 
-    public GeneratedValues findByValue (String value) throws InterruptedException {
+    public SessionEntity findByValue (String value) throws InterruptedException {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        GeneratedValues generatedValues = session.byNaturalId(GeneratedValues.class).using("generatedValue", value).load();
+        SessionEntity sessionEntity = session.byNaturalId(SessionEntity.class).using("sessionValue", value).load();
         session.close();
-        return generatedValues;
+        return sessionEntity;
     }
 
-    public void save(GeneratedValues generatedValues) {
+    public void save(SessionEntity sessionEntity) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.save(generatedValues);
+            session.save(session);
             transaction.commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -37,11 +35,11 @@ public class GeneratedValueDao {
 
     }
 
-    public void delete(GeneratedValues generatedValues) {
+    public void delete(SessionEntity sessionEntity) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.delete(generatedValues);
+            session.delete(sessionEntity);
             transaction.commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -49,5 +47,4 @@ public class GeneratedValueDao {
         }
         session.close();
     }
-
 }

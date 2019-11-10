@@ -56,12 +56,12 @@ public class Main {
 
 
 //        generatedValue = generatedValueService.createGeneratedValue(10,true,true);
-//        user = new User ();
-//        user.setEmail("kardinaldon@yandex.ua");
-//        user.setPassword("123456");
-//        user.setRole(RoleEnum.USER);
-//        user.setStatusEnum(StatusEnum.NOT_ACTIVE);
-//        userService.createUser(user);
+        user = new User ();
+        user.setEmail("kardinaldon@yandex.ua");
+        user.setPassword("123456");
+        user.setRole(RoleEnum.USER);
+        user.setStatusEnum(StatusEnum.ACTIVE);
+        userService.createUser(user);
 
 //            try {
 //                if(generatedValueService.findGeneratedValuesByValue("rmOueNlSNb") != null) {
@@ -77,13 +77,13 @@ public class Main {
 
 
 
-        try {
-            user = userService.findUserByEmail("kardinaldon@yandex.ua");
-            userService.deleteUser(user);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            user = userService.findUserByEmail("kardinaldon@yandex.ua");
+//            userService.deleteUser(user);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 //        GeneratedValueService generatedValueService = new GeneratedValueService();
 //        GeneratedValues generatedValue = generatedValueService.createGeneratedValue(10,true,true);

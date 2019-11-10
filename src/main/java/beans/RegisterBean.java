@@ -31,14 +31,13 @@ public class RegisterBean {
     private User user= new User();
 
     FacesContext context = FacesContext.getCurrentInstance();
-    Object sessionMap = context.getExternalContext().getSessionMap().get("JSESSIONID");
     FacesMessage message;
+
     private String path = context.getExternalContext().getRequestContextPath();
     private ExternalContext externalContext = context.getExternalContext();
     private RegisterService registerService = new RegisterService();
 
     public void createUser (@Email @NotNull String email, @NotNull String password) {
-        System.out.println((String) sessionMap.toString());
         if (!email.isEmpty() & !password.isEmpty()) {
             try {
                 if (userService.findUserByEmail(email) != null) {

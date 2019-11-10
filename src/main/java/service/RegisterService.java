@@ -18,7 +18,6 @@ public class RegisterService {
     private UserService userService = new UserService();
     private SendMailService sendMailService = new SendMailService();
     private GeneratedValueService generatedValueService = new GeneratedValueService();
-    private StatusEnum statusEnum;
 
 
     public void startRegistration (String email, String password) {

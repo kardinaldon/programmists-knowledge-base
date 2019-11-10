@@ -1,15 +1,14 @@
 package service;
 
-import dao.GeneratedValueDao;
+import dao.GeneratedValueDAO;
 import models.GeneratedValues;
 import utils.RandomGenerator;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
 public class GeneratedValueService {
-    GeneratedValueDao generatedValueDao = new GeneratedValueDao();
+    GeneratedValueDAO generatedValueDao = new GeneratedValueDAO();
     GeneratedValues generatedValues;
     RandomGenerator randomGenerator;
 

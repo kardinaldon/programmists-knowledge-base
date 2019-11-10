@@ -1,4 +1,4 @@
-package models;
+package models.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,20 +9,20 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "generated_values")
+@Table(name = "session_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Immutable
-public class GeneratedValues {
+public class SessionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "generatedValueId", updatable = false, nullable = false)
-    private int generatedValueId;
+    @Column(name = "sessionId", updatable = false, nullable = false)
+    private long sessionId;
 
     @NaturalId
-    @Column(name = "generatedValue")
-    private String generatedValue;
+    @Column(name = "sessionValue")
+    private String sessionValue;
 
 }
