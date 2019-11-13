@@ -1,4 +1,4 @@
-package beans;
+package beans.registerBean;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -16,14 +16,16 @@ import javax.faces.context.FacesContext;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 @ManagedBean
 @RequestScoped
 @Data
 @Slf4j
-public class RegisterBean {
+public class RegisterBean implements Serializable {
 
+    private static final long serialVersionUID = 291007155103388578L;
     String email;
     String password;
 

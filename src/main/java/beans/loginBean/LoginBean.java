@@ -1,6 +1,8 @@
-package beans;
+package beans.loginBean;
 
+import beans.session_bean.SessionBean;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,18 +21,20 @@ import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.io.Serializable;
 
 
 @ManagedBean
 @RequestScoped
 @Data
 @Slf4j
-public class LoginBean {
+public class LoginBean implements Serializable {
 
-    @Inject
-    private SessionBean sessionBean;
+    private static final long serialVersionUID = 4869863707559346602L;
+
 
     @Setter
+    @Getter
     private String email;
 
     @Setter
@@ -57,9 +61,9 @@ public class LoginBean {
             if (user != null && user.getPassword().equals(password)) {
                 addMessage(false, "Вход выполнен");
                 log.info("login as " + email);
-                sessionBean.setSessionId(sessionId);
+
                 try {
-                    externalContext.redirect(path + "/secured/index.html");
+                    externalContext.redirect(path + "/administrator/secured/main_administrator_page.xhtml");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

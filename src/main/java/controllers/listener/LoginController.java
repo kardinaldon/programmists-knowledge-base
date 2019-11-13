@@ -1,7 +1,7 @@
 package controllers.listener;
 
-import beans.LoginBean;
-import beans.SessionBean;
+import beans.loginBean.LoginBean;
+import beans.session_bean.SessionBean;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;

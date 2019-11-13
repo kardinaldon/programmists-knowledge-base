@@ -1,0 +1,64 @@
+body {
+
+}
+
+body:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("#{resource['media/administrators_pages_img/background_img/admin_page_background_1.jpg']}");
+    width: 100%;
+    height: 100%;
+    opacity : 0.7;
+    z-index: -1;
+}
+
+#header_div {
+    float: left;
+    width: 100%;
+}
+
+#content_div {
+    max-width: 100%;
+    max-height: 500px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    float: left;
+    margin-left: 50px;
+    margin-top: 60px;
+    background-color: ivory;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+.ui-menu {
+    background-color: ivory;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+.ui-menu.ui-menu-toggleable li.ui-widget-header {
+    background-color: bisque;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+#menu_div {
+    float: left;
+}
+
+#main_content {
+    float: left;
+    width: 100%;
+}
+
+#header_text_for_create_article_table {
+    margin: 10px;
+}
+
+#footer_div {
+    float: left;
+    width: 100%;
+}
+

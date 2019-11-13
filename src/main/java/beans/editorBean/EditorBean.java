@@ -1,4 +1,4 @@
-package beans;
+package beans.editorBean;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,7 @@ import service.CategoryService;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -19,7 +20,9 @@ import java.time.ZoneId;
 @RequestScoped
 @Data
 @Slf4j
-public class EditorView {
+public class EditorBean implements Serializable {
+
+    private static final long serialVersionUID = -791063364347842035L;
 
     private String headline;
     private String text;
