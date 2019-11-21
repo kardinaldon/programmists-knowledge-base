@@ -1,29 +1,13 @@
 
 import dao.CategoryDAO;
-import models.Category;
-import models.GeneratedValues;
-import models.LetterTemplate;
-import models.user.RoleEnum;
-import models.user.StatusEnum;
-import models.user.User;
-import org.apache.commons.lang3.RandomStringUtils;
+import dao.UserDAO;
+import models.entity.Article;
+import models.entity.Category;
+import models.entity.GeneratedValues;
+import models.entity.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.*;
-import utils.RandomGenerator;
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.persistence.GeneratedValue;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -31,37 +15,62 @@ public class Main {
     public static void main(String[] args) {
 
         UserService userService = new UserService();
+        UserDAO userDAO = new UserDAO();
         CategoryService categoryService = new CategoryService();
         CategoryDAO categoryDAO = new CategoryDAO();
         GeneratedValueService generatedValueService = new GeneratedValueService();
         Category category = new Category();
-        User user;
+        User user = new User();
         GeneratedValues generatedValue = new GeneratedValues();
+        Article article = new Article();
+        ArticleService articleService = new ArticleService();
 
-
-
-
-//        category.setTitle("Category title 4");
-//        category.setDescription("category description 4 keywords");
-//        categoryService.saveCategory(category);
-
-//        System.out.println(categoryDAO.findByTitle("Category title").getDescription().toString());
-
-//        List<Category> categories = categoryService.findCategoryByKeyword("key");
-//        for (Category resultCategory : categories) {
-//            System.out.println(resultCategory.getTitle() + " " + resultCategory.getDescription());
+//        for(Category category1:categoryService.findAllCategory()) {
+//            System.out.println(category1);
 //        }
+
+//        for(User user2: userService.findAllUsers()) {
+//            System.out.println(user2);
+//        }
+//
+//        for (Article article1: articleService.findAllArticles()) {
+//            System.out.println(article1.getTitle());
+//        }
+
+
+//        article = articleService.findArticleWithId(1);
+//        System.out.println(article.getCategory().getTitle());
+
+//        for (Category category1: categoryDAO.findSubcategories(1)) {
+//            System.out.println(category1.getTitle());
+//        }
+
+
+//        Create a category and article
+//        category.setTitle("Category title 2");
+//        category.setDescription("category description 2 keywords");
+//        category.setLevel(categoryService.findCategoryById(1).getLevel()+1);
+//        category.setParentId(1);
+//        categoryService.saveCategory(category);
+//        article.setTitle("Title for new article 2");
+//        article.setSmallDescription("Small description for new Article 2");
+//        article.setDescription("Full description for a new article 2");
+//        article.setCategory(categoryService.findCategoryById(2));
+//        article.setUser(userService.findUserById(1));
+//        article.setDateOfCreation(LocalDateTime.now());
+//        articleService.saveArticle(article);
+
 
 
 
 
 //        generatedValue = generatedValueService.createGeneratedValue(10,true,true);
-        user = new User ();
-        user.setEmail("kardinaldon@yandex.ua");
-        user.setPassword("123456");
-        user.setRole(RoleEnum.USER);
-        user.setStatusEnum(StatusEnum.ACTIVE);
-        userService.createUser(user);
+//        user = new User ();
+//        user.setEmail("kardinalmail@gmail.com");
+//        user.setPassword("654321");
+//        user.setRole(RoleEnum.USER);
+//        user.setStatusEnum(StatusEnum.ACTIVE);
+//        userService.createUser(user);
 
 //            try {
 //                if(generatedValueService.findGeneratedValuesByValue("rmOueNlSNb") != null) {

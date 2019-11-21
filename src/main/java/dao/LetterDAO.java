@@ -1,7 +1,7 @@
 package dao;
 
 
-import models.LetterTemplate;
+import models.entity.LetterTemplate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
@@ -62,15 +62,16 @@ public class LetterDAO {
     public void deleteAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.createQuery("DELETE FROM models.LetterTemplate").executeUpdate();
+        session.createQuery("DELETE FROM models.entity.LetterTemplate").executeUpdate();
         session.getTransaction().commit();
         session.flush();
         session.close();
     }
 
+    @SuppressWarnings("unchecked")
     public List<LetterTemplate> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<LetterTemplate> userList = (List<LetterTemplate>)  session.createQuery("From models.LetterTemplate").list();
+        List<LetterTemplate> userList = (List<LetterTemplate>)  session.createQuery("From models.entity.LetterTemplate").list();
         session.close();
         return userList;
     }

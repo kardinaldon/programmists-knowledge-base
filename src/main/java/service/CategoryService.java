@@ -1,16 +1,11 @@
 package service;
 
 import dao.CategoryDAO;
-import models.Category;
-
-import java.util.ArrayList;
+import models.entity.Category;
 import java.util.List;
 
 public class CategoryService {
     private CategoryDAO categoryDAO = new CategoryDAO();
-
-    public CategoryService() {
-    }
 
     public List<Category> findCategoryByKeyword (String key) {
 
@@ -24,8 +19,16 @@ public class CategoryService {
         return categories;
     }
 
-    public Category findCategoryWitId(int id) {
+    public Category findCategoryById(int id) {
         return categoryDAO.findById(id);
+    }
+
+    public Category findCategoryByTitle (String title) {
+        return categoryDAO.findByTitle(title);
+    }
+
+    public List<Category> findSubcategories (int categoryId) {
+        return categoryDAO.findSubcategories(categoryId);
     }
 
     public void saveCategory(Category category) {

@@ -1,10 +1,10 @@
 package service;
 
-import models.GeneratedValues;
-import models.LetterTemplate;
-import models.user.RoleEnum;
-import models.user.StatusEnum;
-import models.user.User;
+import models.entity.GeneratedValues;
+import models.entity.LetterTemplate;
+import models.entity.user.RoleEnum;
+import models.entity.user.StatusEnum;
+import models.entity.user.User;
 
 
 import java.util.concurrent.TimeUnit;

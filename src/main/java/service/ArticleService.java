@@ -1,7 +1,7 @@
 package service;
 
 import dao.ArticleDAO;
-import models.Article;
+import models.entity.Article;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package dao;
 
-import models.user.User;
+import models.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
@@ -9,16 +9,34 @@ import utils.HibernateSessionFactoryUtil;
 import java.util.List;
 
 public class UserDAO {
+
+    private User user;
+
     public User findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.get(User.class, id);
+        Transaction transaction = session.beginTransaction();
+        try {
+            user = session.get(User.class, id);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            ex.getCause();
+        }
         session.close();
         return user;
     }
 
     public User findByName(String email) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        User user = session.byNaturalId(User.class).using("email", email).load();
+        Transaction transaction = session.beginTransaction();
+        try {
+            user = session.byNaturalId(User.class).using("email", email).load();
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            ex.getCause();
+        }
+
         session.close();
         return user;
     }
@@ -66,14 +84,15 @@ public class UserDAO {
     public void deleteAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.createQuery("DELETE FROM models.user.User").executeUpdate();
+        session.createQuery("DELETE FROM models.entity.user.User").executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
+    @SuppressWarnings("unchecked")
     public List<User> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<User> userList = session.createQuery("From models.user.User").list();
+        List<User> userList =  session.createQuery("From models.entity.user.User").list();
         session.close();
         return userList;
     }

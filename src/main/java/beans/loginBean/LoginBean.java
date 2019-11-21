@@ -1,13 +1,12 @@
 package beans.loginBean;
 
-import beans.session_bean.SessionBean;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import models.user.SessionEntity;
-import models.user.User;
+import models.entity.user.SessionEntity;
+import models.entity.user.User;
 import service.HttpSessionService;
 import service.UserService;
 
@@ -16,7 +15,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

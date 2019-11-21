@@ -1,7 +1,7 @@
 package service;
 
 import dao.SessionDAO;
-import models.user.SessionEntity;
+import models.entity.user.SessionEntity;
 
 public class HttpSessionService {
 

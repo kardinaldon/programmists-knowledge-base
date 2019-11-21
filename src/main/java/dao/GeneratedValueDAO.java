@@ -1,6 +1,6 @@
 package dao;
 
-import models.GeneratedValues;
+import models.entity.GeneratedValues;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

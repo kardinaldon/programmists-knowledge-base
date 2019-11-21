@@ -1,7 +1,7 @@
 package service;
 
 import dao.GeneratedValueDAO;
-import models.GeneratedValues;
+import models.entity.GeneratedValues;
 import utils.RandomGenerator;
 
 import java.util.concurrent.TimeUnit;

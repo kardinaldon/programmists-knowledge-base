@@ -19,6 +19,8 @@ create table categories (
     categoryId serial,
     title varchar(300) unique not null,
     description text,
+    parentId int,
+    level int,
     PRIMARY KEY (categoryId)
 );
 

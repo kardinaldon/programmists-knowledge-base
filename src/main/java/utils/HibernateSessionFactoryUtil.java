@@ -1,10 +1,10 @@
 package utils;
 
-import models.Article;
-import models.Category;
-import models.GeneratedValues;
-import models.LetterTemplate;
-import models.user.User;
+import models.entity.Article;
+import models.entity.Category;
+import models.entity.GeneratedValues;
+import models.entity.LetterTemplate;
+import models.entity.user.User;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

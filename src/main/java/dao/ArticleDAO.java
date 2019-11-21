@@ -1,6 +1,6 @@
 package dao;
 
-import models.Article;
+import models.entity.Article;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -9,9 +9,12 @@ import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import utils.HibernateSessionFactoryUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleDAO {
+
+    List<Article> articleList = new ArrayList<>();
 
     public Article findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -88,14 +91,15 @@ public class ArticleDAO {
     public void deleteAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.createQuery("DELETE FROM models.Article").executeUpdate();
+        session.createQuery("DELETE FROM models.entity.Article").executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Article> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Article> articleList = (List<Article>)  session.createQuery("From models.Article").list();
+        articleList = session.createQuery("From models.entity.Article").setCacheable(true).list();
         session.close();
         return articleList;
     }

@@ -1,9 +1,8 @@
 package service;
 
 import dao.UserDAO;
-import models.user.User;
+import models.entity.user.User;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public class UserService {
@@ -13,7 +12,7 @@ public class UserService {
         return userDAO.findById(id);
     }
 
-    public User findUserByEmail(String email) throws InterruptedException {
+    public User findUserByEmail(String email) {
         return userDAO.findByName(email);
     }
 

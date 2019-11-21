@@ -2,9 +2,7 @@ package beans.registerBean;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import models.user.RoleEnum;
-import models.user.StatusEnum;
-import models.user.User;
+import models.entity.user.User;
 import service.RegisterService;
 import service.UserService;
 

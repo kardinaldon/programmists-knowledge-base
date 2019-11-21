@@ -1,6 +1,6 @@
 package dao;
 
-import models.Category;
+import models.entity.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -62,6 +62,17 @@ public class CategoryDAO {
         return categories;
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Category> findSubcategories (int categoryId) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        String hql = "FROM models.entity.Category where parentId = :paramName";
+        Query query = session.createQuery(hql).setCacheable(true);
+        query.setParameter("paramName", categoryId);
+        List<Category> categories = query.list();
+//        List<Category> categoryList = (List<Category>)  session.createQuery("From models.entity.Category where parentid=:categoryId").setCacheable(true).list();
+        session.close();
+        return categories;
+    }
 
     public void save(Category category) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -90,14 +101,15 @@ public class CategoryDAO {
     public void deleteAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.createQuery("DELETE FROM models.Category").executeUpdate();
+        session.createQuery("DELETE FROM models.entity.Category").executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Category> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Category> categoryList = (List<Category>)  session.createQuery("From models.Category").list();
+        List<Category> categoryList = (List<Category>)  session.createQuery("From models.entity.Category").setCacheable(true).list();
         session.close();
         return categoryList;
     }

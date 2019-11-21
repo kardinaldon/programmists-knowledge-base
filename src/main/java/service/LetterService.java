@@ -1,7 +1,7 @@
 package service;
 
 import dao.LetterDAO;
-import models.LetterTemplate;
+import models.entity.LetterTemplate;
 
 import java.util.List;
 

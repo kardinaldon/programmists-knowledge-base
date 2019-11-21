@@ -45,10 +45,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.java.version>8</project.java.version>
-        <jersey.version>2.29</jersey.version>
+        <jersey.version>2.29.1</jersey.version>
         <jaxb.version>2.3.1</jaxb.version>
+        <fasterxml.jackson.version>2.10.1</fasterxml.jackson.version>
         <postgresql.version>42.2.6</postgresql.version>
-        <hibernate.version>5.4.7.Final</hibernate.version>
+        <hibernate.version>5.4.8.Final</hibernate.version>
+        <hibernate_search.version>5.11.3.Final</hibernate_search.version>
+        <ehcache.version>3.8.1</ehcache.version>
+        <infinispan.version>10.0.1.Final</infinispan.version>
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>2.12.1</log4j.version>
         <logback.version>1.2.3</logback.version>
@@ -71,13 +75,24 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search-orm</artifactId>
-            <version>5.11.3.Final</version>
+            <version>${hibernate_search.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
         </dependency>
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-directory-provider</artifactId>
-            <version>10.0.1.Final</version>
+            <version>${infinispan.version}</version>
         </dependency>
+
 
         <!--Jersey services-->
         <dependency>
@@ -100,6 +115,31 @@
             <artifactId>jaxb-api</artifactId>
             <version>${jaxb.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${fasterxml.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
 
         <!--Logging-->
         <dependency>
@@ -116,6 +156,23 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.12.1</version>
+            <scope>test</scope>
         </dependency>
 
         <!--Lombok-->
