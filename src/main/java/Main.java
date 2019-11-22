@@ -4,6 +4,8 @@ import dao.UserDAO;
 import models.entity.Article;
 import models.entity.Category;
 import models.entity.GeneratedValues;
+import models.entity.user.RoleEnum;
+import models.entity.user.StatusEnum;
 import models.entity.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

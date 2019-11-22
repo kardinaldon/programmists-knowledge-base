@@ -41,7 +41,7 @@ public class CategoryController {
         return categoryService.findCategoryByTitle(title);
     }
 
-    @GET
+    @POST
     @Path("/find_by_keyword")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

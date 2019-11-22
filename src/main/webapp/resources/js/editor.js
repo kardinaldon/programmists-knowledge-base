@@ -4,14 +4,17 @@ new Vue({
         title: '',
         smallDescription: '',
         description: '',
+        categories: null,
+        selected_category: null,
+        category_keyword: '',
         info: null,
         loading: false,
-        errored: false
+        errored: false,
     },
     methods: {
         submitEntry() {
             axios
-                .post('../rest/article/new_article',{ title: this.title, smallDescription: this.smallDescription, description: this.description })
+                .post('../rest/article/new_article',{ title: this.title, smallDescription: this.smallDescription, description: this.description, category: this.selected_category })
                 .then(response => {
                     this.info = response.data;
                 })
@@ -24,5 +27,12 @@ new Vue({
         // update: _.debounce(function (e) {
         //     this.description = e.target.value
         // }, 300),
+        getCategoryList() {
+            axios
+                .post('../rest/category/find_by_keyword',{key: this.category_keyword})
+                .then(response => {
+                    this.categories = response.data;
+                })
+        }
     },
 });

@@ -38,33 +38,53 @@
                 </ul>
             </nav>
             <div id="main_page_content">
-                <div id="category">
-                    <button id="category_button" type = "button" name = "button1" @change="getCategoryList()" @click="getCategoryList()">категория</button>
-                    <div id="submit_cat">
-                        <a href="#" class="btn btn-success" @change="getCategoryList()" @click="getCategoryList()">категория</a>
-                    </div>
-                    <div
-                            v-for="category in info"
-                            class="category"
-                    >
-                        <span class="lighten">
-                            <span v-html="category.title" id="category_title"></span>
-                            <span v-html="category.description" id="category_description"></span>
-                        </span>
-                    </div>
-                </div>
+<!--                <div id="category">-->
+<!--                    <button id="category_button" type = "button" name = "button1" @change="getCategoryList()" @click="getCategoryList()">категория</button>-->
+<!--                    <div id="submit_cat">-->
+<!--                        <a href="#" class="btn btn-success" @change="getCategoryList()" @click="getCategoryList()">категория</a>-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                            v-for="category in info"-->
+<!--                            class="category"-->
+<!--                    >-->
+<!--                        <span class="lighten">-->
+<!--                            <span v-html="category.title" id="category_title"></span>-->
+<!--                            <span v-html="category.description" id="category_description"></span>-->
+<!--                        </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
                 <div id="editor_content">
                     <div id="input_title">
-                        <input type="text" placeholder="Title of article" class="form-control" v-model="title" />
-                        <input type="text" placeholder="Small description for article" class="form-control"  v-model="smallDescription" />
+                        <input type="text" placeholder="Title of article" class="form-control" v-model="title"/>
+                        <input type="text" placeholder="Small description for article" class="form-control"
+                               v-model="smallDescription"/>
+                        <a href="#openModal">Выберите категорию</a>
+                        <div id="openModal" class="modalDialog">
+
+                            <a href="#close" title="Закрыть" class="close">X</a>
+                            <input v-model="category_keyword" @change="getCategoryList()"
+                                   placeholder="Начните ввод названия категории"/>
+                            <div v-for="category in categories">
+                                <input type="radio" id="cat_radio" :value="category" v-model="selected_category">
+                                <label for="cat_radio"> {{ category.title }} </label>
+                            </div>
+                            <!--                            <ul id="example-1">-->
+                            <!--                                <li v-for="category in categories">-->
+                            <!--                                    {{ category.title }}-->
+                            <!--                                </li>-->
+                            <!--                            </ul>-->
+                        </div>
                     </div>
-                    <div id="editor">
-                        <textarea v-model="description"></textarea>
-                    </div>
-                    <div id="submit">
-                        <a href="#" class="btn btn-success" @change="submitEntry()" @click="submitEntry">Submit</a>
-                    </div>
+
+<!--                </div>-->
+                <div id="editor">
+                    <textarea v-model="description"></textarea>
                 </div>
+                <div id="submit">
+                    <a href="#" class="btn btn-success" @change="submitEntry()" @click="submitEntry">Submit</a>
+                </div>
+            </div>
             </div>
 
         </main>

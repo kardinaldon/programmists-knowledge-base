@@ -20,10 +20,10 @@ import java.util.List;
 public class ArticlesController {
 
     private ArticleService articleService = new ArticleService();
-    private Article article;
-    private List<Article> articleList;
-    private ArticleModelForJsonOut articleModelForJsonOut;
-    private List <ArticleModelForJsonOut> articleModelForJsonOutList;
+    private Article article = new Article();
+    private List<Article> articleList = new ArrayList<>();
+    private ArticleModelForJsonOut articleModelForJsonOut = new ArticleModelForJsonOut();
+    private List <ArticleModelForJsonOut> articleModelForJsonOutList = new ArrayList<>();
     private UserService userService = new UserService();
     private CategoryService categoryService = new CategoryService();
 
@@ -36,7 +36,6 @@ public class ArticlesController {
     @Consumes(MediaType.APPLICATION_JSON)
     public List <ArticleModelForJsonOut> getAllArticles() {
         articleList = articleService.findAllArticles();
-        articleModelForJsonOutList = new ArrayList<>();
         for (Article article: articleList) {
             articleModelForJsonOut = new ArticleModelForJsonOut();
             articleModelForJsonOut.setArticleId(article.getArticleId());
@@ -49,7 +48,6 @@ public class ArticlesController {
             articleModelForJsonOutList.add(articleModelForJsonOut);
         }
         logger.info("RESTfull Service running /article/all");
-        System.out.println("RESTfull Service running /article/all");
         return articleModelForJsonOutList;
     }
 
@@ -60,7 +58,7 @@ public class ArticlesController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Article getArticleOnId(@QueryParam("id") int id) {
-        System.out.println("RESTful Service running article/getwitid: "+id);
+        logger.info("RESTful Service running article/getwitid: "+id);
         return articleService.findArticleWithId(id);
     }
 
@@ -72,9 +70,9 @@ public class ArticlesController {
     public void createNewArticle (Article article) {
         article.setDateOfCreation(LocalDateTime.now(Clock.system(ZoneId.of("Europe/Moscow"))));
         article.setUser(userService.findUserById(1));
-        article.setCategory(categoryService.findCategoryById(1));
+//        article.setCategory(categoryService.findCategoryById(1));
         articleService.saveArticle(article);
-        System.out.println("RESTful Service running /newproduct "+article.getArticleId()+" "+article.getTitle()+" "+article.getCategory().getTitle()+" "+article.getUser());
+        logger.info("RESTful Service running /newproduct "+article.getArticleId()+" "+article.getTitle()+" "+article.getCategory().getTitle()+" "+article.getUser());
     }
 
 }
