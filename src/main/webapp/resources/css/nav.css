@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 html {
-    height:100%;
-    background-image: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);
+    /*background-image: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);*/
+    background: url(../media/administrators_pages_img/background_img/admin_page_background_8.jpg);
 }
 
 nav {
@@ -14,7 +14,7 @@ nav {
 
 nav ul {
     text-align: center;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.7) 25%, rgba(255, 255, 255, 0.7) 75%, rgba(255, 255, 255, 0.7) 100%);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
@@ -23,6 +23,7 @@ nav ul li {
 }
 
 nav ul li a {
+    text-shadow: black 0 0 7px;
     padding: 18px;
     font-family: "Open Sans";
     text-transform:uppercase;
@@ -37,5 +38,38 @@ nav ul li a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.1);
     color: rgba(0, 35, 122, 0.7);
+}
+
+.context_down {
+    margin: auto;
+    margin-left: 30%;
+}
+
+/*.context_down:hover {*/
+/*    display: block;*/
+/*}*/
+
+ul li ul {
+    /*background: orange;*/
+    visibility: hidden;
+    opacity: 0;
+    min-width: 5rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+ul li ul li {
+    clear: both;
+    /*width: 100%;*/
 }
 

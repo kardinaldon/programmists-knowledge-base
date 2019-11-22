@@ -2,6 +2,15 @@ body {
 
 }
 
+.header_right {
+    float: right;
+}
+
+.header_button {
+
+}
+
+
 body:after {
     content : "";
     display: block;
@@ -61,4 +70,33 @@ body:after {
     float: left;
     width: 100%;
 }
+
+footer {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.7) 25%, rgba(255, 255, 255, 0.7) 75%, rgba(255, 255, 255, 0.7) 100%);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.9);
+    margin: auto;
+    margin-top: 1%;
+    max-width: 980px;
+    min-height: 60px;
+}
+
+#footer_left {
+    float: left;
+}
+
+#footer_center {
+    margin: 0 auto;
+    float: left;
+    margin-left: 10px;
+}
+
+#footer_right {
+    float: right;
+    margin-right: 10px;
+}
+
+.footer_text {
+    text-shadow: white 0 0 10px;
+}
+
 

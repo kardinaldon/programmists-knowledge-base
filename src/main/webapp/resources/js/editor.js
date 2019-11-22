@@ -5,6 +5,7 @@ new Vue({
         smallDescription: '',
         description: '',
         categories: null,
+        category_state: 'Выберите категорию',
         selected_category: null,
         category_keyword: '',
         info: null,
@@ -32,6 +33,7 @@ new Vue({
                 .post('../rest/category/find_by_keyword',{key: this.category_keyword})
                 .then(response => {
                     this.categories = response.data;
+                    this.category_state = 'Категория выбрана';
                 })
         }
     },
