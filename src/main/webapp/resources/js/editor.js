@@ -15,7 +15,7 @@ new Vue({
     methods: {
         submitEntry() {
             axios
-                .post('../rest/article/new_article',{ title: this.title, smallDescription: this.smallDescription, description: this.description, category: this.selected_category })
+                .post('../rest/article/new',{ title: this.title, smallDescription: this.smallDescription, description: this.description, category: this.selected_category })
                 .then(response => {
                     this.info = response.data;
                 })
@@ -30,7 +30,7 @@ new Vue({
         // }, 300),
         getCategoryList() {
             axios
-                .post('../rest/category/find_by_keyword',{key: this.category_keyword})
+                .get('../rest/category/key',{params: {key: this.category_keyword}})
                 .then(response => {
                     this.categories = response.data;
                     this.category_state = 'Категория выбрана';

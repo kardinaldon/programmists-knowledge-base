@@ -17,7 +17,7 @@ public class CategoryController {
     private CategoryService categoryService = new CategoryService();
 
     @GET
-    @Path("/get_all")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public List<Category> getAllCategory () {
@@ -26,31 +26,40 @@ public class CategoryController {
     }
 
     @GET
-    @Path("/get_by_id")
+    @Path("/tree")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Category getCategoryById (int id) {
+    public List<Category> getCategoryTree (@QueryParam("id") int id) {
+//        categoryList.addAll(categoryService.findAllCategory());
+        return categoryService.findCategoryTree(id);
+    }
+
+    @GET
+    @Path("/category")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Category getCategoryById (@QueryParam("id") int id) {
         return categoryService.findCategoryById(id);
     }
 
     @GET
-    @Path("/get_by_title")
+    @Path("/category/{title}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Category getByTitle (String title) {
+    public Category getByTitle (@PathParam("title") String title) {
         return categoryService.findCategoryByTitle(title);
     }
 
-    @POST
-    @Path("/find_by_keyword")
+    @GET
+    @Path("/key")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<Category> findByKeywords (String key) {
+    public List<Category> findByKeywords (@QueryParam("key") String key) {
         return categoryService.findCategoryByKeyword(key);
     }
 
     @POST
-    @Path("/create")
+    @Path("/new")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createCategory (Category category) {
         categoryService.saveCategory(category);

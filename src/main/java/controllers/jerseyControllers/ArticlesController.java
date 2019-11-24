@@ -54,7 +54,7 @@ public class ArticlesController {
     //получить статью по id
     // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/get_by_id?id=1   - получить статью с id 1
     @GET
-    @Path("/get_by_id")
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Article getArticleOnId(@QueryParam("id") int id) {
@@ -64,7 +64,7 @@ public class ArticlesController {
 
     //создать новую статью http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/newarticle
     @POST
-    @Path("/new_article")
+    @Path("/new")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void createNewArticle (Article article) {

@@ -11,7 +11,7 @@ new Vue({
     methods: {
         getCategoryList() {
             axios
-                .get('../rest/category/get_all')
+                .get('../rest/category/all')
                 .then(response => {
                     this.info = response.data;
                 })
