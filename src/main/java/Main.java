@@ -36,11 +36,11 @@ public class Main {
         GeneratedValueService generatedValueService = new GeneratedValueService();
 
 
-        ForTest forTest = new ForTest();
-        categoryList = forTest.findCategoryTree(0);
-        for (Category category2: categoryList) {
-            System.out.println(category2.getLevel() + " category Id " + category2.getCategoryId() + " || " + "parent Id " + category2.getParentId());
-        }
+
+//        categoryList = categoryService.findCategoryTree(0);
+//        for (Category category2: categoryList) {
+//            System.out.println(category2.getLevel() + " category Id " + category2.getCategoryId() + " || " + "parent Id " + category2.getParentId());
+//        }
 
 //        categoryList = categoryDAO.findByParentId(12);
 //        if (!categoryList.isEmpty()) {
