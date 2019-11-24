@@ -1,6 +1,7 @@
 package dao;
 
 import models.entity.Category;
+import org.checkerframework.checker.units.qual.A;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -9,6 +10,7 @@ import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import utils.HibernateSessionFactoryUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
@@ -24,6 +26,13 @@ public class CategoryDAO {
         Category category = session.byNaturalId(Category.class).using("title", title).load();
         session.close();
         return category;
+    }
+
+    public List<Category> findByParentId(int parentId) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<Category> categoryList = (List<Category>)  session.createQuery("From models.entity.Category where parentId="+parentId).list();
+        session.close();
+        return categoryList;
     }
 
 
@@ -59,18 +68,6 @@ public class CategoryDAO {
             }
         }
 
-        return categories;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Category> findSubcategories (int categoryId) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        String hql = "FROM models.entity.Category where parentId = :paramName";
-        Query query = session.createQuery(hql).setCacheable(true);
-        query.setParameter("paramName", categoryId);
-        List<Category> categories = query.list();
-//        List<Category> categoryList = (List<Category>)  session.createQuery("From models.entity.Category where parentid=:categoryId").setCacheable(true).list();
-        session.close();
         return categories;
     }
 

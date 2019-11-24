@@ -53,6 +53,7 @@ public class Category {
     @Column(name="description")
     private String description;
 
+    @NaturalId
     @Column(name = "parentId")
     private int parentId;
 

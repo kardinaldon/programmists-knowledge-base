@@ -11,21 +11,45 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
+
+
     public static void main(String[] args) {
 
         UserService userService = new UserService();
         UserDAO userDAO = new UserDAO();
         CategoryService categoryService = new CategoryService();
         CategoryDAO categoryDAO = new CategoryDAO();
-        GeneratedValueService generatedValueService = new GeneratedValueService();
         Category category = new Category();
         User user = new User();
         GeneratedValues generatedValue = new GeneratedValues();
         Article article = new Article();
         ArticleService articleService = new ArticleService();
+        List<Category> categoryList = new ArrayList<>();
+        GeneratedValueService generatedValueService = new GeneratedValueService();
+
+
+        ForTest forTest = new ForTest();
+        categoryList = forTest.findCategoryTree(0);
+        for (Category category2: categoryList) {
+            System.out.println(category2.getLevel() + " category Id " + category2.getCategoryId() + " || " + "parent Id " + category2.getParentId());
+        }
+
+//        categoryList = categoryDAO.findByParentId(12);
+//        if (!categoryList.isEmpty()) {
+//            System.out.println("not empty");
+//        } else {
+//            System.out.println("empty");
+//        }
+
+
 
 //        for(Category category1:categoryService.findAllCategory()) {
 //            System.out.println(category1);
@@ -49,10 +73,10 @@ public class Main {
 
 
 //        Create a category and article
-//        category.setTitle("Category title 2");
-//        category.setDescription("category description 2 keywords");
+//        category.setTitle("Category title 12");
+//        category.setDescription("category description 12");
+//        category.setParentId(5);
 //        category.setLevel(categoryService.findCategoryById(1).getLevel()+1);
-//        category.setParentId(1);
 //        categoryService.saveCategory(category);
 //        article.setTitle("Title for new article 2");
 //        article.setSmallDescription("Small description for new Article 2");

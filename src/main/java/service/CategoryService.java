@@ -27,10 +27,6 @@ public class CategoryService {
         return categoryDAO.findByTitle(title);
     }
 
-    public List<Category> findSubcategories (int categoryId) {
-        return categoryDAO.findSubcategories(categoryId);
-    }
-
     public void saveCategory(Category category) {
         categoryDAO.save(category);
     }
