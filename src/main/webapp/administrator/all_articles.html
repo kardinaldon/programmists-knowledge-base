@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../resources/css/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/main_content.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/for_admin_pages/administrator_pages.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/for_admin_pages/all_articles_page.css" type="text/css"/>
+</head>
+<body>
+<header>
+    <div class="header_right">
+        <button class="header_button" id="return">Вернутья</button>
+        <button class="header_button" id="logout">Выйти</button>
+    </div>
+
+</header>
+<main>
+    <nav>
+        <ul>
+            <li>
+                <a href="../administrator/admin_main_page.html">Главная</a>
+            </li>
+            <li>
+                <a href="#">Контент</a>
+                <ul class="context_down">
+                    <li>
+                        <a href="../administrator/create_article.html">Новая статья</a>
+                    </li>
+                    <li>
+                        <a href="../administrator/create_article.html">Список статей</a>
+                    </li>
+                    <li>
+                        <a href="#">Новая категория</a>
+                    </li>
+                    <li>
+                        <a href="#">Список категорий</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Пользователи</a>
+                <ul class="context_down">
+                    <li>
+                        <a href="#">Список пользователей</a>
+                    </li>
+                    <li>
+                        <a href="#">Новый пользователь</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Настройки</a>
+            </li>
+            <li>
+                <a href="#">Справка</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="main_page_content">
+        <table >
+            <caption>Список всех статей</caption>
+            <tr>
+                <th>ID</th>
+                <th>Название статьи</th>
+                <th>Категория</th>
+                <th>Автор</th>
+                <th>Дата создания</th>
+            </tr>
+            <tr v-for="article in articles">
+                <th>{{article.articleId}}</th>
+                <th>{{article.title}}</th>
+                <th>{{article.categoryName}}</th>
+                <th>{{article.userName}}</th>
+                <th>{{article.dateOfCreation}}</th>
+            </tr>
+        </table>
+    </div>
+
+</main>
+<footer>
+    <div id="footer_left">
+
+    </div>
+    <div id="footer_center">
+        <p class="footer_text">Версия cms "Alpha"</p>
+    </div>
+    <div id="footer_right">
+        <p class="footer_text">Автор "Cardinal"</p>
+    </div>
+</footer>
+<script src="../resources/js/for_admin_pages/all_articles_page.js"></script>
+</body>
+</html>
