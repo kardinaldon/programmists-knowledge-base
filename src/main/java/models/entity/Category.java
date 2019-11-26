@@ -14,15 +14,16 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
 @EqualsAndHashCode
-@ToString
+@Indexed
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Indexed
 @AnalyzerDef(name = "categoryAnalyzer",
         tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
@@ -53,11 +54,16 @@ public class Category {
     @Column(name="description")
     private String description;
 
-    @NaturalId
     @Column(name = "parentId")
     private int parentId;
 
     @Column(name = "level")
     private int level;
 
-}
+    @Column(name = "lft")
+    private int left;
+
+    @Column(name = "rght")
+    private int right;
+
+   }

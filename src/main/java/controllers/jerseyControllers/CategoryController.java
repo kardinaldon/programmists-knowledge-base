@@ -1,6 +1,7 @@
 package controllers.jerseyControllers;
 
 import models.entity.Category;
+
 import service.CategoryService;
 
 import javax.ws.rs.*;
@@ -31,6 +32,8 @@ public class CategoryController {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<Category> getCategoryTree (@QueryParam("id") int id) {
 //        categoryList.addAll(categoryService.findAllCategory());
+//        categoryList = categoryService.findAllCategory();
+
         return categoryService.findCategoryTree(id);
     }
 

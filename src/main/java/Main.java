@@ -73,11 +73,12 @@ public class Main {
 
 
 //        Create a category and article
-//        category.setTitle("Category title 12");
-//        category.setDescription("category description 12");
-//        category.setParentId(5);
-//        category.setLevel(categoryService.findCategoryById(1).getLevel()+1);
-//        categoryService.saveCategory(category);
+        category.setTitle("утюги");
+        category.setDescription("описание для категории утюги");
+        category.setParentId(8);
+        category.setLevel(3);
+        categoryDAO.addCategoryInNestedSet(8,category);
+
 //        article.setTitle("Title for new article 2");
 //        article.setSmallDescription("Small description for new Article 2");
 //        article.setDescription("Full description for a new article 2");

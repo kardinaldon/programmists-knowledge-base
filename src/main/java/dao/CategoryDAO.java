@@ -10,10 +10,12 @@ import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import utils.HibernateSessionFactoryUtil;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
+
     public Category findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Category category = session.get(Category.class, id);
@@ -35,6 +37,74 @@ public class CategoryDAO {
         return categoryList;
     }
 
+    public void addCategoryInNestedSet(int parentId, Category category) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Category parentCategory = findById(parentId);
+            Query query = session.createQuery("update models.entity.Category set lft = lft + 2 where lft >:right");
+            query.setParameter("right", parentCategory.getRight());
+            query.executeUpdate();
+            query = session.createQuery("update models.entity.Category set rght = rght + 2 where rght >=:right");
+            query.setParameter("right", parentCategory.getRight());
+            query.executeUpdate();
+            category.setLeft(parentCategory.getRight());
+            category.setRight(parentCategory.getRight()+1);
+            save(category);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new RuntimeException(ex);
+        }
+
+    }
+
+    public void deleteCategoryFromNestedSet (Category category) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        //если узел не имеет потомков
+        if (category.getRight()-category.getLeft()==1) {
+            try {
+                Query query = session.createQuery("update models.entity.Category set lft = lft - 2 where lft >:left");
+                query.setParameter("left", category.getLeft());
+                query.executeUpdate();
+                query = session.createQuery("update models.entity.Category set rght = rght - 2 where rght >:right");
+                query.setParameter("right", category.getRight());
+                query.executeUpdate();
+                delete(category);
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw new RuntimeException(ex);
+            }
+        } else {
+            try {
+
+                Query query = session.createQuery("update models.entity.Category set lft = lft - 1 where lft >:left and rght <:right");
+                query.setParameter("left", category.getLeft());
+                query.setParameter("right", category.getRight());
+
+                query = session.createQuery("update models.entity.Category set rght = rght - 1 where lft >:left and rght <:right");
+                query.setParameter("left", category.getLeft());
+                query.setParameter("right", category.getRight());
+                query.executeUpdate();
+
+                query = session.createQuery("update models.entity.Category set lft = lft - 2 where lft >:right");
+                query.setParameter("right", category.getRight());
+                query.executeUpdate();
+
+                query = session.createQuery("update models.entity.Category set rght = rght - 2 where rght >:right");
+                query.setParameter("right", category.getRight());
+                query.executeUpdate();
+                delete(category);
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw new RuntimeException(ex);
+            }
+        }
+        session.close();
+    }
 
     public List<Category> findByKeyword (String keyword) throws InterruptedException {
         List<Category> categories = null;
