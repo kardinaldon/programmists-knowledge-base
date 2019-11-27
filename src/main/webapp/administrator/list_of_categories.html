@@ -8,12 +8,9 @@
     <link rel="stylesheet" href="../resources/css/nav.css" type="text/css"/>
     <link rel="stylesheet" href="../resources/css/main_content.css" type="text/css"/>
     <link rel="stylesheet" href="../resources/css/for_admin_pages/administrator_pages.css" type="text/css"/>
-
-    <link href="https://cdn.jsdelivr.net/npm/ant-design-vue@1.3.10/dist/antd.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@1.3.10/dist/antd.min.js"></script>
 </head>
 <body>
+
 <header>
     <div class="header_right">
         <button class="header_button" id="return">Вернутья</button>
@@ -64,10 +61,7 @@
         </ul>
     </nav>
     <div id="main_page_content">
-        <button class="down" @change="getAllCategories">
-            Сохранить статью
-        </button>
-
+        <div id="tree"></div>
     </div>
 
 </main>
@@ -82,6 +76,6 @@
         <p class="footer_text">Автор "Cardinal"</p>
     </div>
 </footer>
-<script src="../resources/js/for_admin_pages/test2.js"></script>
+<script src="../resources/js/for_admin_pages/list_of_categories.js"></script>
 </body>
 </html>

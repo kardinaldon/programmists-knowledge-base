@@ -1,61 +1,45 @@
-const input = [{
-    id : 1,
-    parent_id : 1,
-    text: 'Корень'
-},{
-    id : 2,
-    parent_id : 1,
-    text: 'Первый уровень 1'
-},{
-    id : 3,
-    parent_id : 1,
-    text: 'Первый уровень 2'
-},{
-    id : 4,
-    parent_id : 2,
-    text: 'Второй уровень'
-},{
-    id : 5,
-    parent_id : 4,
-    text: 'Третий уровень уровень 1'
-},{
-    id : 6,
-    parent_id : 4,
-    text: 'Третий уровень уровень 2'
-}];
+new Vue ({
+    el: '#main_page_content',
+    data: {
 
-// сначала приведём в соответствие позицию объекта и его id
-// но, что бы не изменять исходный объект, мы создадим другой
-const output = [];
+    },
+    mounted() {
+        axios
+            .get('../rest/category/all')
+            .then(response => {
+                categories = response.data;
 
-for (const item of input) {
-    // т.к. минимальный идентификатор элемента равен 1,
-    // вычтем из идентификатора единицу, что бы задействовать
-    // индекс 0 (но можно этого и не делать)
-    output[item.id - 1] = item;
-}
+                var node = document.getElementById('tree');
+                node.innerHTML = '';
 
-// теперь, в массиве output идентификатор каждого элемента
-// соответствует его позии в массиве
+                if (categories.length) {
+                    var ul = document.createElement('ul');
+                    var tree = fetchChildElement(ul);
+                    node.appendChild(tree);
+                }
 
-// далее, присвоим каждому родителю его детей
-for (const item of output) {
-    if (item.id !== item.parent_id) {
-        // не забываем, что мы вычитали из каждого идентификатора
-        // единицу по этому и здесь тоже вычитаем
-        const parent = output[item.parent_id - 1];
+                function fetchChildElement(container, left, right) {
+                    categories.filter(filterItems);
+                    return container;
 
-        // убедимся, что родительский элемент
-        // имеет свойство children
-        if (!Array.isArray(parent.children)) {
-            parent.children = [];
-        }
+                    function filterItems(item) {
+                        if (item.left === (left || 1)) {
+                            var element = document.createElement('li');
+                            element.innerHTML = item.title;
+                            if (item.left + 1 < item.right) {
+                                var childContainer = document.createElement('ul');
+                                var child = fetchChildElement(childContainer, item.left + 1, item.right - 1);
+                                element.appendChild(child);
+                            }
 
-        // добавляем текущий элемент родителю
-        parent.children.push(item);
-    }
-}
+                            container.appendChild(element);
 
-// в итоге, элемент с индексом 0 всегда будет представлять
-// из себя полное дерево
-console.log(output[0]);
+                            if (right && item.right < right) {
+                                fetchChildElement(container, item.right + 1, right);
+                            }
+                        }
+                    }
+                }
+            })
+    },
+});
