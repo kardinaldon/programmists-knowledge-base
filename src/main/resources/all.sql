@@ -12,6 +12,7 @@ create table user_table (
     password varchar(300) not null,
     role numeric,
     status numeric,
+    sessionid varchar(300),
     PRIMARY KEY (userId)
 );
 
@@ -23,6 +24,8 @@ create table categories (
     level int,
     PRIMARY KEY (categoryId)
 );
+
+insert into categories (title,description,parentId,lft,rght,level) values ('Категории','описание для категории','0','1','2','1');
 
 create table articles (
     articleId serial,

@@ -34,4 +34,7 @@ public class User {
     @Column(name = "status")
     private StatusEnum statusEnum;
 
+    @Column(name = "sessionid")
+    private  String sessionId;
+
 }

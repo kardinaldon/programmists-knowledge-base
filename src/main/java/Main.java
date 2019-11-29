@@ -37,6 +37,14 @@ public class Main {
 
 
 
+        user.setEmail("cardinalmail@mail.ru");
+        user.setPassword("123456");
+        user.setRole(RoleEnum.ADMIN);
+        user.setStatusEnum(StatusEnum.ACTIVE);
+        userService.createUser(user);
+
+
+
 //        categoryList = categoryService.findCategoryTree(0);
 //        for (Category category2: categoryList) {
 //            System.out.println(category2.getLevel() + " category Id " + category2.getCategoryId() + " || " + "parent Id " + category2.getParentId());
@@ -73,11 +81,11 @@ public class Main {
 
 
 //        Create a category and article
-        category.setTitle("утюги");
-        category.setDescription("описание для категории утюги");
-        category.setParentId(8);
-        category.setLevel(3);
-        categoryDAO.addCategoryInNestedSet(8,category);
+//        category.setTitle("Бытовая техника для кухни");
+//        category.setDescription("описание для кухонной бытовай техники");
+//        category.setParentId(2);
+//        category.setLevel(categoryService.findCategoryById(category.getParentId()).getLevel()+1);
+//        categoryDAO.addCategoryInNestedSet(category.getParentId(),category);
 
 //        article.setTitle("Title for new article 2");
 //        article.setSmallDescription("Small description for new Article 2");

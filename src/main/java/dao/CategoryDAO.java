@@ -40,22 +40,37 @@ public class CategoryDAO {
     public void addCategoryInNestedSet(int parentId, Category category) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        try {
-            Category parentCategory = findById(parentId);
-            Query query = session.createQuery("update models.entity.Category set lft = lft + 2 where lft >:right");
-            query.setParameter("right", parentCategory.getRight());
-            query.executeUpdate();
-            query = session.createQuery("update models.entity.Category set rght = rght + 2 where rght >=:right");
-            query.setParameter("right", parentCategory.getRight());
-            query.executeUpdate();
-            category.setLeft(parentCategory.getRight());
-            category.setRight(parentCategory.getRight()+1);
-            save(category);
-            transaction.commit();
-        } catch (Exception ex) {
-            transaction.rollback();
-            throw new RuntimeException(ex);
+        if(parentId == 0) {
+            try {
+                Query query = session.createSQLQuery("select max (rght) FROM categories");
+                int right = (int) query.getSingleResult();
+                category.setLeft(right+1);
+                category.setRight(right+2);
+                save(category);
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw new RuntimeException(ex);
+            }
+        } else {
+            try {
+                Category parentCategory = findById(parentId);
+                Query query = session.createQuery("update models.entity.Category set lft = lft + 2 where lft >:right");
+                query.setParameter("right", parentCategory.getRight());
+                query.executeUpdate();
+                query = session.createQuery("update models.entity.Category set rght = rght + 2 where rght >=:right");
+                query.setParameter("right", parentCategory.getRight());
+                query.executeUpdate();
+                category.setLeft(parentCategory.getRight());
+                category.setRight(parentCategory.getRight()+1);
+                save(category);
+                transaction.commit();
+            } catch (Exception ex) {
+                transaction.rollback();
+                throw new RuntimeException(ex);
+            }
         }
+
 
     }
 

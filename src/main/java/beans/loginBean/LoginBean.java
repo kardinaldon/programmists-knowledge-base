@@ -1,8 +1,8 @@
 package beans.loginBean;
 
+import beans.session_bean.SessionBean;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import lombok.extern.slf4j.Slf4j;
 
 import models.entity.user.SessionEntity;
@@ -13,6 +13,7 @@ import service.UserService;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -30,12 +31,8 @@ public class LoginBean implements Serializable {
 
     private static final long serialVersionUID = 4869863707559346602L;
 
-
-    @Setter
-    @Getter
     private String email;
 
-    @Setter
     private String password;
 
     private UserService userService = new UserService();
@@ -61,7 +58,13 @@ public class LoginBean implements Serializable {
                 log.info("login as " + email);
 
                 try {
-                    externalContext.redirect(path + "/administrator/secured/main_administrator_page.xhtml");
+                    user.setSessionId(sessionId);
+                    userService.updateUser(user);
+                    session.setAttribute("name",email);
+//                    sessionBean.setSessionId(sessionId);
+//                    System.out.println(sessionId);
+                    externalContext.redirect(path + "/administrator/admin_main_page.html");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
