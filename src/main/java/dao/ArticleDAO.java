@@ -2,6 +2,7 @@ package dao;
 
 import models.entity.Article;
 
+import models.entity.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -24,15 +25,34 @@ public class ArticleDAO {
         return article;
     }
 
-    public Article findByNaturalId (String title) {
+    public Article findByNaturalId(String title) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Article article = session.get(Article.class, title);
         session.close();
         return article;
     }
 
+    public Long selectCountOfArticlesFromAnyCategories() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("select count(*) from models.entity.Article");
+        Long count = (Long) query.getSingleResult();
+        transaction.commit();
+        session.close();
+        return count;
+    }
 
-    public List<Article> findByKeyword (String keyword) {
+    public Long selectCountOfArticlesFromCertainCategory(Category category) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("select count(*) from models.entity.Article where category = :category").setParameter("category", category);
+        Long count = (Long) query.getSingleResult();
+        transaction.commit();
+        session.close();
+        return count;
+    }
+
+    public List<Article> findByKeyword(String keyword) {
         List<Article> articles = null;
         Transaction transaction = null;
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
@@ -106,13 +126,12 @@ public class ArticleDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Article> selectArticlesWithLimit (int start, int limit) {
+    public List<Article> selectArticlesWithLimit(int start, int limit) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         articleList = session.createQuery("from models.entity.Article").setFirstResult(start).setMaxResults(limit).list();
         transaction.commit();
         session.close();
-//        query.executeUpdate();
         return articleList;
     }
 }

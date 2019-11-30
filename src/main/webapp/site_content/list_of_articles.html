@@ -31,17 +31,18 @@
                 </li>
             </ul>
         </nav>
-
-        <div id="app">
-            <h1>List of all articles</h1>
-            <div
-                    v-for="article in info"
-                    class="article"
-            >
-                <span class="lighten">
+        <div id="main_page_content">
+            <div id="app">
+                <h1>List of all articles</h1>
+                <div
+                        v-for="article in info"
+                        class="article"
+                >
+            <span class="lighten">
                 <span v-html="article.title" id="article_title"></span>
                     <span v-html="article.description" id="article_description"></span>
             </span>
+                </div>
             </div>
         </div>
         <script src="../resources/js/main.js"></script>

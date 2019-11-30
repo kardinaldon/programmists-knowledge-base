@@ -93,4 +93,14 @@ public class ArticlesController {
         article.setUser(userService.findUserById(1));
         articleService.saveArticle(article);
     }
+
+    //получить общее кол-во статей в БД http://localhost:8080/com_programmists_knowledge_base_1_war/rest/article/count
+    @GET
+    @Path("/count")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+    public Long getCountOfArticles() {
+        return articleService.selectCountOfArticlesFromAnyCategories();
+    }
+
 }

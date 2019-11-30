@@ -39,6 +39,9 @@ public class Main {
         List<Category> categoryList = new ArrayList<>();
         GeneratedValueService generatedValueService = new GeneratedValueService();
 
+        System.out.println(articleDAO.selectCountOfArticlesFromCertainCategory(categoryService.findCategoryById(4)));
+
+
 //        articleList = articleDAO.selectTenCategories(10,10);
 //        for(Article article1 : articleList) {
 //            System.out.println(article1.getTitle());

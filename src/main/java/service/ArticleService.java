@@ -2,6 +2,7 @@ package service;
 
 import dao.ArticleDAO;
 import models.entity.Article;
+import models.entity.Category;
 
 import java.util.List;
 
@@ -38,5 +39,13 @@ public class ArticleService {
 
     public List<Article> selectArticlesWithLimit (int start, int limit) {
         return articleDAO.selectArticlesWithLimit(start,limit);
+    }
+
+    public Long selectCountOfArticlesFromAnyCategories() {
+        return articleDAO.selectCountOfArticlesFromAnyCategories();
+    }
+
+    public Long selectCountOfArticlesFromCertainCategory(Category category) {
+        return articleDAO.selectCountOfArticlesFromCertainCategory(category);
     }
 }
