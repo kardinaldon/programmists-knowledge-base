@@ -1,20 +1,21 @@
 package dao;
 
 import models.entity.Article;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+
 import utils.HibernateSessionFactoryUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleDAO {
 
-    List<Article> articleList = new ArrayList<>();
+    private List<Article> articleList;
 
     public Article findById(int id) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
@@ -101,6 +102,17 @@ public class ArticleDAO {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         articleList = session.createQuery("From models.entity.Article").setCacheable(true).list();
         session.close();
+        return articleList;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Article> selectArticlesWithLimit (int start, int limit) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        articleList = session.createQuery("from models.entity.Article").setFirstResult(start).setMaxResults(limit).list();
+        transaction.commit();
+        session.close();
+//        query.executeUpdate();
         return articleList;
     }
 }

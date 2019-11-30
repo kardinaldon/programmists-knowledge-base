@@ -1,4 +1,5 @@
 
+import dao.ArticleDAO;
 import dao.CategoryDAO;
 import dao.UserDAO;
 import models.entity.Article;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,18 +33,41 @@ public class Main {
         User user = new User();
         GeneratedValues generatedValue = new GeneratedValues();
         Article article = new Article();
+        ArticleDAO articleDAO = new ArticleDAO();
         ArticleService articleService = new ArticleService();
+        List<Article> articleList;
         List<Category> categoryList = new ArrayList<>();
         GeneratedValueService generatedValueService = new GeneratedValueService();
 
+//        articleList = articleDAO.selectTenCategories(10,10);
+//        for(Article article1 : articleList) {
+//            System.out.println(article1.getTitle());
+//        }
 
 
-        user.setEmail("cardinalmail@mail.ru");
-        user.setPassword("123456");
-        user.setRole(RoleEnum.ADMIN);
-        user.setStatusEnum(StatusEnum.ACTIVE);
-        userService.createUser(user);
+//      Create a user
+//        user.setEmail("cardinalmail@mail.ru");
+//        user.setPassword("123456");
+//        user.setRole(RoleEnum.ADMIN);
+//        user.setStatusEnum(StatusEnum.ACTIVE);
+//        userService.createUser(user);
 
+
+//        Create a category
+//        category.setTitle("Обзоры");
+//        category.setDescription("описание для категории Обзоры");
+//        category.setParentId(1);
+//        category.setLevel(categoryService.findCategoryById(category.getParentId()).getLevel()+1);
+//        categoryDAO.addCategoryInNestedSet(category.getParentId(),category);
+
+//        Create article
+//        article.setTitle("Статья оприроде 4");
+//        article.setSmallDescription("короткое описание для Статьи оприроде 4");
+//        article.setDescription("полное описание для Статьи оприроде 4");
+//        article.setCategory(categoryService.findCategoryById(4));
+//        article.setUser(userService.findUserById(1));
+//        article.setDateOfCreation(LocalDateTime.now());
+//        articleService.saveArticle(article);
 
 
 //        categoryList = categoryService.findCategoryTree(0);
@@ -78,23 +103,6 @@ public class Main {
 //        for (Category category1: categoryDAO.findSubcategories(1)) {
 //            System.out.println(category1.getTitle());
 //        }
-
-
-//        Create a category and article
-//        category.setTitle("Бытовая техника для кухни");
-//        category.setDescription("описание для кухонной бытовай техники");
-//        category.setParentId(2);
-//        category.setLevel(categoryService.findCategoryById(category.getParentId()).getLevel()+1);
-//        categoryDAO.addCategoryInNestedSet(category.getParentId(),category);
-
-//        article.setTitle("Title for new article 2");
-//        article.setSmallDescription("Small description for new Article 2");
-//        article.setDescription("Full description for a new article 2");
-//        article.setCategory(categoryService.findCategoryById(2));
-//        article.setUser(userService.findUserById(1));
-//        article.setDateOfCreation(LocalDateTime.now());
-//        articleService.saveArticle(article);
-
 
 
 

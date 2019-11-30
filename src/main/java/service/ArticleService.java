@@ -35,4 +35,8 @@ public class ArticleService {
     public List<Article> findAllArticles() {
         return articleDAO.findAll();
     }
+
+    public List<Article> selectArticlesWithLimit (int start, int limit) {
+        return articleDAO.selectArticlesWithLimit(start,limit);
+    }
 }
