@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <link rel="stylesheet" href="../resources/css/nav.css" type="text/css"/>
-        <link rel="stylesheet" href="../resources/css/main_content.css" type="text/css"/>
-    </head>
-    <body>
-        <header>
-            <h3>Header logo and description</h3>
-        </header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="../index.html">Home</a>
-                </li>
-                <li>
-                    <a href="../site_content/list_of_articles.html">Articles</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </nav>
-        <div id="main_page_content">
-            <div id="app">
-                <h1>List of all articles</h1>
-                <div
-                        v-for="article in info"
-                        class="article"
-                >
-            <span class="lighten">
-                <span v-html="article.title" id="article_title"></span>
-                    <span v-html="article.description" id="article_description"></span>
-            </span>
-                </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../resources/css/nav.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/main_content.css" type="text/css"/>
+</head>
+<body>
+<header>
+    <h3>Header logo and description</h3>
+</header>
+<nav>
+    <ul>
+        <li>
+            <a href="../index.html">Home</a>
+        </li>
+        <li>
+            <a href="../site_content/list_of_articles.html">Articles</a>
+        </li>
+        <li>
+            <a href="#">Services</a>
+        </li>
+        <li>
+            <a href="#">Services</a>
+        </li>
+        <li>
+            <a href="#">Contact</a>
+        </li>
+    </ul>
+</nav>
+<div id="main_page_content">
+    <select id="category_count_selector" v-model="selected">
+        <option v-for="option in options" :value="option.value">
+            {{ option.text }}
+        </option>
+    </select>
+    <span>Выбрано: {{ selected }}</span>
+    <div id="app">
+        <h1>List of all articles</h1>
+        <div
+                v-for="article in part_of_articles"
+                class="article"
+        >
+            <div id="article.title" v-html="article.title"></div>
+            <div id="article.category_name" v-html="article.categoryName"></div>
+            <div id="article.date_of_creation" v-html="article.dateOfCreation"></div>
+            <div id="article.small_description" v-html="article.smallDescription"></div>
+
+
+            <!--            <span class="lighten">-->
+            <!--                <span v-html="article.title" id="article_title"></span>-->
+            <!--                    <span v-html="article.description" id="article_description"></span>-->
+            <!--            </span>-->
+
         </div>
-        <script src="../resources/js/main.js"></script>
-    </body>
+    </div>
+</div>
+<script src="../resources/js/site_content/list_of_articles.js"></script>
+</body>
 </html>
