@@ -34,20 +34,16 @@ public class ArticleDAO {
 
     public Long selectCountOfArticlesFromAnyCategories() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("select count(*) from models.entity.Article");
         Long count = (Long) query.getSingleResult();
-        transaction.commit();
         session.close();
         return count;
     }
 
     public Long selectCountOfArticlesFromCertainCategory(Category category) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("select count(*) from models.entity.Article where category = :category").setParameter("category", category);
         Long count = (Long) query.getSingleResult();
-        transaction.commit();
         session.close();
         return count;
     }

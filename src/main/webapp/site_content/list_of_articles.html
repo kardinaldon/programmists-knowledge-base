@@ -32,14 +32,14 @@
     </ul>
 </nav>
 <div id="main_page_content">
-    <select id="category_count_selector" v-model="selected">
+    <select id="category_count_selector" v-model="selected" @change="onChange($event)">
         <option v-for="option in options" :value="option.value">
             {{ option.text }}
         </option>
     </select>
     <span>Выбрано: {{ selected }}</span>
     <div id="app">
-        <h1>List of all articles</h1>
+        <h1>Всего статей на сайте: {{count}}</h1>
         <div
                 v-for="article in part_of_articles"
                 class="article"
