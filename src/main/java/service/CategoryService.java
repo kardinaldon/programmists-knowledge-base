@@ -55,6 +55,10 @@ public class CategoryService {
         categoryDAO.save(category);
     }
 
+    public void addCategoryInNestedSet(Category category) {
+        categoryDAO.addCategoryInNestedSet(category);
+    }
+
     public void deleteCategory(Category category) {
         categoryDAO.delete(category);
     }

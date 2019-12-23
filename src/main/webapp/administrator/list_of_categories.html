@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -14,10 +15,9 @@
 
 <header>
     <div class="header_right">
-        <button class="header_button" id="return">Вернутья</button>
-        <button class="header_button" id="logout">Выйти</button>
+        <button class="right" id="return">Вернутья</button>
+        <button class="right" id="logout">Выйти</button>
     </div>
-
 </header>
 <main>
     <nav>
@@ -29,16 +29,16 @@
                 <a href="#">Контент</a>
                 <ul class="context_down">
                     <li>
-                        <a href="../administrator/create_article.html">Новая статья</a>
+                        <a href="../administrator/new_article.html">Новая статья</a>
                     </li>
                     <li>
-                        <a href="../administrator/create_article.html">Список статей</a>
+                        <a href="../administrator/all_articles.html">Список статей</a>
                     </li>
                     <li>
-                        <a href="#">Новая категория</a>
+                        <a href="../administrator/new_category.html">Новая категория</a>
                     </li>
                     <li>
-                        <a href="#">Список категорий</a>
+                        <a href="../administrator/list_of_categories.html">Список категорий</a>
                     </li>
                 </ul>
             </li>

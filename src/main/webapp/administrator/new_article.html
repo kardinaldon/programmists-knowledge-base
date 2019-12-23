@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title>Title</title>
+    <title>Create article</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/marked@0.3.6"></script>
+    <script src="https://unpkg.com/lodash@4.16.0"></script>
     <link rel="stylesheet" href="../resources/css/nav.css" type="text/css"/>
     <link rel="stylesheet" href="../resources/css/main_content.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/for_admin_pages/new_article_editor.css" type="text/css"/>
+    <link rel="stylesheet" href="../resources/css/modal_category.css" type="text/css"/>
     <link rel="stylesheet" href="../resources/css/for_admin_pages/administrator_pages.css" type="text/css"/>
-    <link rel="stylesheet" href="../resources/css/for_admin_pages/all_articles_page.css" type="text/css"/>
+
 </head>
 <body>
 <header>
@@ -17,7 +21,6 @@
         <button class="right" id="return">Вернутья</button>
         <button class="right" id="logout">Выйти</button>
     </div>
-
 </header>
 <main>
     <nav>
@@ -62,37 +65,40 @@
         </ul>
     </nav>
     <div id="main_page_content">
-        <table >
-            <caption>Список всех статей</caption>
-            <tr>
-                <th>ID</th>
-                <th>Название статьи</th>
-                <th>Категория</th>
-                <th>Автор</th>
-                <th>Дата создания</th>
-            </tr>
-            <tr v-for="article in articles">
-                <th>{{article.articleId}}</th>
-                <th>{{article.title}}</th>
-                <th>{{article.categoryName}}</th>
-                <th>{{article.userName}}</th>
-                <th>{{article.dateOfCreation}}</th>
-            </tr>
-        </table>
+        <div id="editor_content">
+            <div id="input_title">
+                <input type="text" placeholder="Название статьи" class="form-control" v-model="title"/>
+                <button id="select_cat_button" class="down" onclick="location.href='#openModal'">
+                    {{category_state}}
+                </button>
+                </br>
+                <textarea id="small_descr_text_area" placeholder="Короткое описание для статьи" class="form-control"
+                          v-model="smallDescription"></textarea>
+                <div id="openModal" class="modalDialog">
+                    <a href="#close" title="Закрыть" class="close">X</a>
+                    <input v-model="category_keyword" @change="getCategoryList()"
+                           placeholder="Начните ввод названия категории"/>
+                    <div v-for="category in categories">
+                        <input type="radio" id="cat_radio" :value="category" v-model="selected_category">
+                        <label for="cat_radio"> {{ category.title }} </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editor">
+                <textarea placeholder="полное описание для статьи" v-model="description"></textarea>
+            </div>
+            <button class="down" onclick="location.href='../administrator/new_article.html'" @change="submitEntry()"
+                    @click="submitEntry">
+                Сохранить статью
+            </button>
+        </div>
     </div>
 
 </main>
 <footer>
-    <div id="footer_left">
 
-    </div>
-    <div id="footer_center">
-        <p class="footer_text">Версия cms "Alpha"</p>
-    </div>
-    <div id="footer_right">
-        <p class="footer_text">Автор "Cardinal"</p>
-    </div>
 </footer>
-<script src="../resources/js/for_admin_pages/all_articles_page.js"></script>
+<script src="../resources/js/for_admin_pages/new_article_editor.js"></script>
 </body>
 </html>

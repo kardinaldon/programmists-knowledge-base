@@ -65,7 +65,7 @@ public class CategoryController {
     @Path("/new")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createCategory (Category category) {
-        categoryService.saveCategory(category);
+        categoryService.addCategoryInNestedSet(category);
     }
 
     @POST

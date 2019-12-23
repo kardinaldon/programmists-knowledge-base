@@ -38,8 +38,8 @@ public class Main {
         List<Article> articleList;
         List<Category> categoryList = new ArrayList<>();
         GeneratedValueService generatedValueService = new GeneratedValueService();
-
-        System.out.println(articleDAO.selectCountOfArticlesFromCertainCategory(categoryService.findCategoryById(4)));
+//
+//        System.out.println(articleDAO.selectCountOfArticlesFromCertainCategory(categoryService.findCategoryById(4)));
 
 
 //        articleList = articleDAO.selectTenCategories(10,10);
@@ -57,11 +57,11 @@ public class Main {
 
 
 //        Create a category
-//        category.setTitle("Обзоры");
-//        category.setDescription("описание для категории Обзоры");
-//        category.setParentId(1);
+//        category.setTitle("авпвапвапвп");
+//        category.setDescription("ывапыпвапвапывапвап");
+//        category.setParentId(7);
 //        category.setLevel(categoryService.findCategoryById(category.getParentId()).getLevel()+1);
-//        categoryDAO.addCategoryInNestedSet(category.getParentId(),category);
+//        categoryDAO.addCategoryInNestedSet(category);
 
 //        Create article
 //        article.setTitle("Статья оприроде 4");

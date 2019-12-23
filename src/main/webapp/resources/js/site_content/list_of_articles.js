@@ -1,3 +1,4 @@
+
 new Vue({
     el: '#main_page_content',
     data() {
@@ -13,6 +14,8 @@ new Vue({
                 { text: '50', value: 50 },
                 { text: '100', value: 100}
             ],
+            button_for_start_articles_list: null,
+
 
         };
     },

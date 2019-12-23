@@ -37,9 +37,9 @@
             {{ option.text }}
         </option>
     </select>
-    <span>Выбрано: {{ selected }}</span>
-    <div id="app">
-        <h1>Всего статей на сайте: {{count}}</h1>
+    <span>Показать: {{ selected }} сатей из {{count}}</span>
+    <span>{{button_for_start_articles_list}}</span>
+    <div id="list_of_articles">
         <div
                 v-for="article in part_of_articles"
                 class="article"
@@ -49,14 +49,15 @@
             <div id="article.date_of_creation" v-html="article.dateOfCreation"></div>
             <div id="article.small_description" v-html="article.smallDescription"></div>
 
-
-            <!--            <span class="lighten">-->
-            <!--                <span v-html="article.title" id="article_title"></span>-->
-            <!--                    <span v-html="article.description" id="article_description"></span>-->
-            <!--            </span>-->
-
         </div>
+
     </div>
+<!--    test-->
+    <button class="down" @change="onChangeNext($event)" >
+        следующая страница
+    </button>
+
+<!--    test-->
 </div>
 <script src="../resources/js/site_content/list_of_articles.js"></script>
 </body>

@@ -37,10 +37,10 @@ public class CategoryDAO {
         return categoryList;
     }
 
-    public void addCategoryInNestedSet(int parentId, Category category) {
+    public void addCategoryInNestedSet(Category category) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        if(parentId == 0) {
+        if(category.getParentId() == 0) {
             try {
                 Query query = session.createSQLQuery("select max (rght) FROM categories");
                 int right = (int) query.getSingleResult();
@@ -54,7 +54,7 @@ public class CategoryDAO {
             }
         } else {
             try {
-                Category parentCategory = findById(parentId);
+                Category parentCategory = findById(category.getParentId());
                 Query query = session.createQuery("update models.entity.Category set lft = lft + 2 where lft >:right");
                 query.setParameter("right", parentCategory.getRight());
                 query.executeUpdate();
