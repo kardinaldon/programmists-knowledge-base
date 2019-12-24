@@ -63,6 +63,11 @@ public class CategoryService {
         categoryDAO.delete(category);
     }
 
+    public void deleteCategoryFromNestedSet(int categoryId) {
+        Category category = categoryDAO.findById(categoryId);
+        categoryDAO.deleteCategoryFromNestedSet(category);
+    }
+
     public void deleteAllCategory() {
         categoryDAO.deleteAll();
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache">
@@ -70,6 +70,7 @@
                 <th>Категория</th>
                 <th>Автор</th>
                 <th>Дата создания</th>
+                <th>Действия</th>
             </tr>
             <tr v-for="article in articles">
                 <th>{{article.articleId}}</th>
@@ -77,6 +78,7 @@
                 <th>{{article.categoryName}}</th>
                 <th>{{article.userName}}</th>
                 <th>{{article.dateOfCreation}}</th>
+                <th><button v-on:click="delete_article(article.articleId)"><img src="../resources/media/icons/icon_delete_32_32.png" alt="удалить статью"></button></th>
             </tr>
         </table>
     </div>

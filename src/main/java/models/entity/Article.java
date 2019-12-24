@@ -1,5 +1,10 @@
 package models.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
 import models.entity.user.User;
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
@@ -64,11 +69,11 @@ public class Article implements Serializable {
     @Analyzer(definition = "articleAnalyzer")
     private String description;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne (optional=false, cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn (name="category")
     private Category category;
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne (optional=false, cascade=CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn (name="creator")
     private User user;
 

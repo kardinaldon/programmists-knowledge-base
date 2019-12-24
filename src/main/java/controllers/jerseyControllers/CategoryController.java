@@ -78,8 +78,8 @@ public class CategoryController {
     @DELETE
     @Path("/delete")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteCategory (Category category) {
-        categoryService.deleteCategory(category);
+    public void deleteCategory (int categoryId) {
+        categoryService.deleteCategoryFromNestedSet(categoryId);
     }
 
 

@@ -1,11 +1,10 @@
 package controllers.jerseyControllers;
 
 import models.entity.Article;
-import models.dto.ArticleModelForJsonOut;
+import models.dto.ArticleDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import service.ArticleService;
-import service.CategoryService;
 import service.UserService;
 
 import javax.ws.rs.*;
@@ -22,8 +21,8 @@ public class ArticlesController {
     private ArticleService articleService = new ArticleService();
     private Article article = new Article();
     private List<Article> articleList = new ArrayList<>();
-    private ArticleModelForJsonOut articleModelForJsonOut = new ArticleModelForJsonOut();
-    private List <ArticleModelForJsonOut> articleModelForJsonOutList = new ArrayList<>();
+    private ArticleDto articleDto = new ArticleDto();
+    private List <ArticleDto> articleDtoList = new ArrayList<>();
     private UserService userService = new UserService();
 
     private static final Logger logger = LoggerFactory.getLogger(ArticlesController.class);
@@ -33,21 +32,21 @@ public class ArticlesController {
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List <ArticleModelForJsonOut> getAllArticles() {
+    public List <ArticleDto> getAllArticles() {
         articleList = articleService.findAllArticles();
         for (Article article: articleList) {
-            articleModelForJsonOut = new ArticleModelForJsonOut();
-            articleModelForJsonOut.setArticleId(article.getArticleId());
-            articleModelForJsonOut.setTitle(article.getTitle());
-            articleModelForJsonOut.setSmallDescription(article.getSmallDescription());
-            articleModelForJsonOut.setDescription(article.getDescription());
-            articleModelForJsonOut.setCategoryName(article.getCategory().getTitle());
-            articleModelForJsonOut.setUserName(article.getUser().getEmail());
-            articleModelForJsonOut.setDateOfCreation(String.valueOf(article.getDateOfCreation()));
-            articleModelForJsonOutList.add(articleModelForJsonOut);
+            articleDto = new ArticleDto();
+            articleDto.setArticleId(article.getArticleId());
+            articleDto.setTitle(article.getTitle());
+            articleDto.setSmallDescription(article.getSmallDescription());
+            articleDto.setDescription(article.getDescription());
+            articleDto.setCategoryName(article.getCategory().getTitle());
+            articleDto.setUserName(article.getUser().getEmail());
+            articleDto.setDateOfCreation(article.getDateOfCreation());
+            articleDtoList.add(articleDto);
         }
         logger.info("RESTfull Service running /article/all");
-        return articleModelForJsonOutList;
+        return articleDtoList;
     }
 
     //получить определенное кол-во статей с определенной
@@ -56,21 +55,21 @@ public class ArticlesController {
     @Path("/part")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<ArticleModelForJsonOut> getArticleOnId(@QueryParam("start") int start,
-                                  @QueryParam("limit") int limit) {
+    public List<ArticleDto> getArticleOnId(@QueryParam("start") int start,
+                                           @QueryParam("limit") int limit) {
         articleList = articleService.selectArticlesWithLimit(start,limit);
         for (Article article: articleList) {
-            articleModelForJsonOut = new ArticleModelForJsonOut();
-            articleModelForJsonOut.setArticleId(article.getArticleId());
-            articleModelForJsonOut.setTitle(article.getTitle());
-            articleModelForJsonOut.setSmallDescription(article.getSmallDescription());
-            articleModelForJsonOut.setDescription(article.getDescription());
-            articleModelForJsonOut.setCategoryName(article.getCategory().getTitle());
-            articleModelForJsonOut.setUserName(article.getUser().getEmail());
-            articleModelForJsonOut.setDateOfCreation(String.valueOf(article.getDateOfCreation()));
-            articleModelForJsonOutList.add(articleModelForJsonOut);
+            articleDto = new ArticleDto();
+            articleDto.setArticleId(article.getArticleId());
+            articleDto.setTitle(article.getTitle());
+            articleDto.setSmallDescription(article.getSmallDescription());
+            articleDto.setDescription(article.getDescription());
+            articleDto.setCategoryName(article.getCategory().getTitle());
+            articleDto.setUserName(article.getUser().getEmail());
+            articleDto.setDateOfCreation(article.getDateOfCreation());
+            articleDtoList.add(articleDto);
         }
-        return articleModelForJsonOutList;
+        return articleDtoList;
     }
 
     //получить статью по id
@@ -101,6 +100,13 @@ public class ArticlesController {
 //    @Consumes(MediaType.APPLICATION_JSON)
     public Long getCountOfArticles() {
         return articleService.selectCountOfArticlesFromAnyCategories();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteArticle(@PathParam("id") int id) {
+        articleService.deleteArticle(id);
     }
 
 }

@@ -21,7 +21,8 @@ public class ArticleService {
         articleDAO.save(article);
     }
 
-    public void deleteArticle(Article article) {
+    public void deleteArticle(int articleId) {
+        Article article = articleDAO.findById(articleId);
         articleDAO.delete(article);
     }
 
