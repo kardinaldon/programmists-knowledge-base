@@ -38,6 +38,9 @@ public class Main {
         List<Article> articleList;
         List<Category> categoryList = new ArrayList<>();
         GeneratedValueService generatedValueService = new GeneratedValueService();
+
+
+//        userService.findAllUsers().forEach(s -> System.out.print(s.getEmail() + " "));
 //
 //        System.out.println(articleDAO.selectCountOfArticlesFromCertainCategory(categoryService.findCategoryById(4)));
 

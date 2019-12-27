@@ -57,6 +57,9 @@
         <log4j.version>2.12.1</log4j.version>
         <logback.version>1.2.3</logback.version>
         <lombok.version>1.18.10</lombok.version>
+        <javax.mail.version>1.6.2</javax.mail.version>
+        <javax.servlet.version>4.0.1</javax.servlet.version>
+        <commons.lang3.version>3.9</commons.lang3.version>
     </properties>
 
     <dependencies>
@@ -92,7 +95,6 @@
             <artifactId>infinispan-directory-provider</artifactId>
             <version>${infinispan.version}</version>
         </dependency>
-
 
         <!--Jersey services-->
         <dependency>
@@ -152,21 +154,20 @@
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.12.1</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.12.1</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.12.1</version>
+            <version>${log4j.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -208,21 +209,21 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <version>${javax.servlet.version}</version>
         </dependency>
 
         <!--mail-->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.6.2</version>
+            <version>${javax.mail.version}</version>
         </dependency>
 
         <!--Generate Alphanumeric String-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <version>${commons.lang3.version}</version>
         </dependency>
 
     </dependencies>

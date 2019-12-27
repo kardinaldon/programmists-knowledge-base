@@ -45,4 +45,58 @@ new Vue ({
                 }
             })
     },
+    methods: {
+        get_category() {
+            axios
+                .get('../rest/category/all')
+                .then(response => {
+                    categories = response.data;
+
+                    var node = document.getElementById('tree');
+                    node.innerHTML = '';
+
+                    if (categories.length) {
+                        var ul = document.createElement('ul');
+                        ul.setAttribute("id", "category");
+                        var tree = fetchChildElement(ul);
+                        node.appendChild(tree);
+                    }
+
+                    function fetchChildElement(container, left, right) {
+                        categories.filter(filterItems);
+                        return container;
+
+                        function filterItems(item) {
+                            if (item.left === (left || 1)) {
+                                var element = document.createElement('li');
+                                element.setAttribute("id", "category");
+                                element.innerHTML = item.title;
+                                if (item.left + 1 < item.right) {
+                                    var childContainer = document.createElement('ul');
+                                    childContainer.setAttribute("id", "category");
+                                    var child = fetchChildElement(childContainer, item.left + 1, item.right - 1);
+                                    element.appendChild(child);
+                                }
+
+                                container.appendChild(element);
+
+                                if (right && item.right < right) {
+                                    fetchChildElement(container, item.right + 1, right);
+                                }
+                            }
+                        }
+                    }
+                })
+        },
+        delete_category(n) {
+            axios.delete('../rest/category/' + n)
+                .then(response => {
+                    this.get_articles();
+                    alert("Категория удалена");
+                })
+                .catch(error => {
+                    alert("Категория не может быть удалена");
+                });
+        }
+    }
 });

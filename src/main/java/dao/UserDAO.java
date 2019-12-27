@@ -3,12 +3,18 @@ package dao;
 import models.entity.user.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.HibernateSessionFactoryUtil;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDAO {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
 
     private User user;
 
@@ -91,9 +97,14 @@ public class UserDAO {
 
     @SuppressWarnings("unchecked")
     public List<User> findAll() {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<User> userList =  session.createQuery("From models.entity.user.User").list();
-        session.close();
-        return userList;
+        try {
+            Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+            List<User> userList =  session.createQuery("FROM models.entity.user.User").list();
+            session.close();
+            return userList;
+        } catch (Exception e) {
+            LOGGER.info(e.getCause().toString());
+            return Collections.EMPTY_LIST;
+        }
     }
 }

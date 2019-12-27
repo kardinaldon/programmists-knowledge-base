@@ -76,7 +76,7 @@ public class CategoryController {
     }
 
     @DELETE
-    @Path("/delete")
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteCategory (int categoryId) {
         categoryService.deleteCategoryFromNestedSet(categoryId);

@@ -37,7 +37,7 @@ public class RegisterService {
             generatedValueService.deleteGeneratedValue(generatedValues);
             user = userService.findUserByEmail(email);
             if (user.getStatusEnum() == StatusEnum.NOT_ACTIVE) {
-                userService.deleteUser(user);
+                userService.deleteUser(user.getUserId());
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

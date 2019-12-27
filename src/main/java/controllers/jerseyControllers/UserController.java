@@ -1,70 +1,92 @@
 package controllers.jerseyControllers;
 
+import models.dto.UserDto;
 import models.entity.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import service.UserService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/user")
 public class UserController {
 
     private User user;
-    private UserService userService;
+    private UserDto userDto;
+    private UserService userService = new UserService();
+    private List<User> userList = new ArrayList<>();
+    private List<UserDto> userDtoList = new ArrayList<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/get_all
     @GET
-    @Path("/get_all")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<User> getAllUsers () {
-        return userService.findAllUsers();
+    public Response getAllUsers () {
+        try {
+            userList = userService.findAllUsers();
+            for (User user: userList) {
+                userDto = new UserDto();
+                userDto.setUserId(user.getUserId());
+                userDto.setEmail(user.getEmail());
+                userDto.setRole(user.getRole());
+                userDto.setStatusEnum(user.getStatusEnum());
+                userDtoList.add(userDto);
+            }
+            return Response.ok().entity(new GenericEntity<List<UserDto>>(userDtoList){}).build();
+        } catch (Exception e) {
+            LOGGER.info(e.getCause().toString());
+            return Response.noContent().build();
+        }
+
     }
 
-
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/get_by_id?id=
     @GET
-    @Path("/get_by_id")
+    @Path("/id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public User getById (@QueryParam("id") int id) {
+    public User getById (@PathParam("id") int id) {
         return userService.findUserById(id);
     }
 
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/get_by_email?email=
     @GET
-    @Path("/get_by_email")
+    @Path("/email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public User getByEmail (@QueryParam("email") String email){
+    public User getByEmail (@PathParam("email") String email){
         return userService.findUserByEmail(email);
     }
 
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/update_user
     @PUT
-    @Path("/update_user")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateUser (User user) {
         userService.updateUser(user);
     }
 
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/create_user
     @POST
-    @Path("/create_user")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/new")
     @Consumes(MediaType.APPLICATION_JSON)
     public void createUser (User user) {
+
         userService.createUser(user);
     }
 
-    // http://localhost:8080/com_programmists_knowledge_base_1_war/rest/user/delete_user
     @DELETE
-    @Path("/delete_user")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteUser (User user) {
-        userService.deleteUser(user);
+    public Response deleteUser (@PathParam("id") int id) {
+        try {
+            userService.deleteUser(id);
+            return Response.status(Response.Status.OK).build();
+        } catch (Exception ex){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
 }

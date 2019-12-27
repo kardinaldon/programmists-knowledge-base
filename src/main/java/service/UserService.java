@@ -2,10 +2,16 @@ package service;
 
 import dao.UserDAO;
 import models.entity.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class UserService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
     private UserDAO userDAO = new UserDAO();
 
     public User findUserById(int id) {
@@ -20,7 +26,8 @@ public class UserService {
         userDAO.save(user);
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(int userId) {
+        User user = userDAO.findById(userId);
         userDAO.delete(user);
     }
 
@@ -33,6 +40,12 @@ public class UserService {
     }
 
     public List<User> findAllUsers() {
-        return userDAO.findAll();
+        try {
+            List<User> userList = userDAO.findAll();
+            return userList;
+        } catch (Exception e) {
+            LOGGER.info(e.getCause().toString());
+            return Collections.EMPTY_LIST;
+        }
     }
 }
